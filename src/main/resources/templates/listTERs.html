@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>TER List</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>TER List</h1>
+<a href="/">Accueil</a>
+<a href="addTER">Add TER</a>
+<br/><br/>
+<div>
+    <table border="1">
+        <tr>
+            <th>Teacher</th>
+            <th>Subject</th>
+        </tr>
+        <tr th:each ="TER : ${TER}">
+            <td th:utext="${TER.teacher.Name()}">...</td>
+            <td th:utext="${TER.subject}">...</td>
+            <td><a th:href="@{/showTERUpdateForm/{id}(id=${TER.id})}">Update</a>
+                <a th:href="@{/deleteTER/{id}(id=${TER.id})}">Delete</a></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

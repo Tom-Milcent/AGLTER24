@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Update TER</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>Update a TER:</h1>
+
+<form th:action="@{/addTER}"
+      th:object="${TERForm}" method="POST">
+    <input type="hidden" th:field="*{id}" />
+    Teacher:
+    <select th:field="*{teacher}">
+        <option th:each="option: ${teachers}" th:text="${option.Name()}" th:value="${option.id}">...</option>
+    </select>
+    <br/>
+    Subject:
+    <input type="text" th:field="*{subject}"/>
+    <br/>
+    <input type="submit" value="Update"/>
+</form>
+
+<br/>
+
+<!-- Check if errorMessage is not null and not empty -->
+
+<div th:if="${errorMessage}" th:utext="${errorMessage}"
+     style="color:red;font-style:italic;">
+    ...
+</div>
+
+</body>
+</html>
