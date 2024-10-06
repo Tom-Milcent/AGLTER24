@@ -21,6 +21,7 @@ aglter24/
                         agl/
                             ter24/
                                 DatabaseLoader.java
+                                ProjectIntegrationTests.java
                                 SecurityConfiguration.java
                                 Ter24Application.java
                                 controllers/
@@ -240,6 +241,29 @@ c:\Users\tommi\Documents\Projets\aglter24\pom.xml :
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- JUnit 5 -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>5.7.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Spring Boot Test -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Spring Security Test -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
     </dependencies>
 
 	<build>
@@ -337,7 +361,7 @@ c:\Users\tommi\Documents\Projets\aglter24\.idea\misc.xml :
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_19" default="true" project-jdk-name="openjdk-19" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_23" default="true" project-jdk-name="openjdk-19" project-jdk-type="JavaSDK" />
 </project>
 ```
 
@@ -346,7 +370,6 @@ c:\Users\tommi\Documents\Projets\aglter24\.idea\vcs.xml :
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="VcsDirectoryMappings">
-    <mapping directory="$PROJECT_DIR$/../../.." vcs="Git" />
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
 </project>
@@ -360,7 +383,11 @@ c:\Users\tommi\Documents\Projets\aglter24\.idea\workspace.xml :
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ed5c04e2-40c2-471b-9755-4f66f0a84266" name="Changes" comment="aglter24 crud ter 2" />
+    <list default="true" id="ed5c04e2-40c2-471b-9755-4f66f0a84266" name="Changes" comment="aglter24 crud ter 2">
+      <change afterPath="$PROJECT_DIR$/src/main/java/um/fds/agl/ter24/ProjectIntegrationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/#Transcription.txt" beforeDir="false" afterPath="$PROJECT_DIR$/#Transcription.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -388,29 +415,34 @@ c:\Users\tommi\Documents\Projets\aglter24\.idea\workspace.xml :
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-19&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/cefco/Desktop/prog/GIT_FAC/L3/Prog_L3/2_L3/AGL/aglter24&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;85c4076c4dfdfc7c7e3d0b7dacd82870&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.Ter24Application.executor": "Debug",
+    "WebServerToolWindowFactoryState": "false",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "test",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "openjdk-19",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "spring.configuration.checksum": "85c4076c4dfdfc7c7e3d0b7dacd82870",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Spring Boot.Ter24Application">
     <configuration name="TeacherControllerTest.addTeacherGet" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ter23" />
@@ -519,6 +551,14 @@ c:\Users\tommi\Documents\Projets\aglter24\.idea\workspace.xml :
       </list>
     </recent_temporary>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -544,6 +584,7 @@ c:\Users\tommi\Documents\Projets\aglter24\.idea\workspace.xml :
       <workItem from="1726167432030" duration="124000" />
       <workItem from="1726167567289" duration="130000" />
       <workItem from="1726167716328" duration="67000" />
+      <workItem from="1728233059361" duration="4431000" />
     </task>
     <task id="LOCAL-00001" summary="debut du crud sujet">
       <option name="closed" value="true" />
@@ -636,6 +677,9 @@ c:\Users\tommi\Documents\Projets\aglter24\.idea\workspace.xml :
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$USER_HOME$" />
+    </ignored-roots>
     <MESSAGE value="debut du crud sujet" />
     <MESSAGE value="altg23 start" />
     <MESSAGE value="aglter23 start 2" />
@@ -703,6 +747,123 @@ public class DatabaseLoader implements CommandLineRunner {
     }
 }
 
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\ProjectIntegrationTests.java :
+```
+package com.example.tests.integration;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.AuthorityUtils;
+import um.fds.agl.ter24.Ter24Application;
+
+@SpringBootTest(classes = Ter24Application.class)
+@AutoConfigureMockMvc
+public class ProjectIntegrationTests {
+
+    @Autowired
+    private MockMvc mvc;
+
+    @Autowired
+    private TeacherRepository teacherRepository;
+
+    @Autowired
+    private TERManagerRepository managerRepository;
+
+    @BeforeEach
+    public void setUp() {
+        // Clean up the repositories before each test
+        teacherRepository.deleteAll();
+        managerRepository.deleteAll();
+    }
+
+    @Test
+    @WithMockUser(username = "Chef", roles = "MANAGER")
+    void addTeacherPostNonExistingTeacher() throws Exception {
+        MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/addTeacher")
+                        .param("firstName", "Anne-Marie")
+                        .param("lastName", "Kermarrec")
+                        .param("role", "ROLE_TEACHER"))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        assertNotNull(teacherRepository.findByLastName("Kermarrec"));
+    }
+
+    @Test
+    @WithMockUser(username = "lechef", roles = "MANAGER")
+    void savingTeachersIsPossibleForManager() {
+        SecurityContextHolder.getContext().setAuthentication(
+                new UsernamePasswordAuthenticationToken("lechef", "password", AuthorityUtils.createAuthorityList("ROLE_MANAGER"))
+        );
+
+        TERManager terM1Manager = new TERManager("Mathieu", "lechef", "mdp", "ROLE_MANAGER");
+        managerRepository.save(terM1Manager);
+        teacherRepository.save(new Teacher("Margaret", "Hamilton", "margaret", terM1Manager, "ROLE_TEACHER"));
+        assertThat(teacherRepository.findByLastName("Hamilton"), is(notNullValue()));
+    }
+
+    @Test
+    @WithMockUser(username = "professeur", roles = "TEACHER")
+    void testTeacherCreationInvalidRole() {
+        assertThrows(AccessDeniedException.class, () -> {
+            SecurityContextHolder.getContext().setAuthentication(
+                    new UsernamePasswordAuthenticationToken("professeur", "password", AuthorityUtils.createAuthorityList("ROLE_TEACHER"))
+            );
+            teacherRepository.save(new Teacher("Alan", "Turing", "turing", null, "ROLE_TEACHER"));
+        });
+    }
+
+    @Test
+    public void testToStringHeureValide() {
+        Heure h1 = new Heure(10, 15);
+        assertEquals("10:15", h1.toString());
+    }
+
+    @Test
+    public void testCreationHeureInvalideDepasseHeureMax() {
+        assertThrows(HoraireIncorrectException.class, () -> {
+            new Heure(23, 5);
+        });
+    }
+
+    @Test
+    public void testCreationHeureInvalideGranulariteFausse() {
+        assertThrows(HoraireIncorrectException.class, () -> {
+            new Heure(7, 12);
+        });
+    }
+
+    @Test
+    @WithMockUser(username = "Chef", roles = "MANAGER")
+    void addTeacherGet() throws Exception {
+        MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/addTeacher"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("text/html;charset=UTF-8"))
+                .andExpect(view().name("addTeacher"))
+                .andReturn();
+    }
+}
+
+// Notes:
+// - Ce fichier est un fichier de test Java (type `.java`) à intégrer dans le répertoire `src/test/java` de votre projet pour y placer les tests unitaires et d'intégration.
+// - Ajoutez les importations nécessaires pour toutes les annotations et classes utilisées.
+// - Le test d'intégration `addTeacherPostNonExistingTeacher()` simule l'ajout d'un enseignant avec l'utilisateur "Chef" comme manager.
+// - Les tests unitaires pour la classe `Heure` sont inclus pour valider la logique de gestion des heures dans votre projet.
 ```
 
 c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\SecurityConfiguration.java :
