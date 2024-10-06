@@ -1,0 +1,2912 @@
+Arborescence du projet :
+aglter24/
+    .gitignore
+    mvnw
+    mvnw.cmd
+    pom.xml
+    system.properties
+    .idea/
+        .gitignore
+        compiler.xml
+        encodings.xml
+        jarRepositories.xml
+        misc.xml
+        vcs.xml
+        workspace.xml
+    src/
+        main/
+            java/
+                um/
+                    fds/
+                        agl/
+                            ter24/
+                                DatabaseLoader.java
+                                SecurityConfiguration.java
+                                Ter24Application.java
+                                controllers/
+                                    HomeController.java
+                                    StudentController.java
+                                    TeacherController.java
+                                    TERController.java
+                                entities/
+                                    Student.java
+                                    Sujet.java
+                                    Teacher.java
+                                    TER.java
+                                    TERManager.java
+                                    UserTER.java
+                                forms/
+                                    StudentForm.java
+                                    TeacherForm.java
+                                    TERForm.java
+                                repositories/
+                                    StudentRepository.java
+                                    SujetRepository.java
+                                    TeacherRepository.java
+                                    TERManagerRepository.java
+                                    TERRepository.java
+                                    UserBaseRepository.java
+                                    UserTERRepository.java
+                                services/
+                                    SpringDataJpaUserDetailsService.java
+                                    StudentService.java
+                                    TeacherService.java
+                                    TERManagerService.java
+                                    TERService.java
+            resources/
+                application.properties
+                static/
+                    main.css
+                templates/
+                    addStudent.html
+                    addTeacher.html
+                    addTER.html
+                    error.html
+                    index.html
+                    listStudents.html
+                    listTeachers.html
+                    listTERs.html
+                    updateStudent.html
+                    updateTeacher.html
+                    updateTER.html
+        test/
+            java/
+                um/
+                    fds/
+                        agl/
+                            ter24/
+                                Ter24ApplicationTests.java
+                                controllers/
+                                    TeacherControllerTest.java
+                                repositories/
+                                    TeacherRepositoryTest.java
+    target/
+        classes/
+            application.properties
+            static/
+                main.css
+            templates/
+                addStudent.html
+                addTeacher.html
+                addTER.html
+                error.html
+                index.html
+                listStudents.html
+                listTeachers.html
+                listTERs.html
+                updateStudent.html
+                updateTeacher.html
+                updateTER.html
+            um/
+                fds/
+                    agl/
+                        ter24/
+                            DatabaseLoader.class
+                            SecurityConfiguration.class
+                            Ter24Application.class
+                            controllers/
+                                HomeController.class
+                                StudentController.class
+                                TeacherController.class
+                                TERController.class
+                            entities/
+                                Student.class
+                                Sujet.class
+                                Teacher.class
+                                TER.class
+                                TERManager.class
+                                UserTER.class
+                            forms/
+                                StudentForm.class
+                                TeacherForm.class
+                                TERForm.class
+                            repositories/
+                                StudentRepository.class
+                                SujetRepository.class
+                                TeacherRepository.class
+                                TERManagerRepository.class
+                                TERRepository.class
+                                UserBaseRepository.class
+                                UserTERRepository.class
+                            services/
+                                SpringDataJpaUserDetailsService.class
+                                StudentService.class
+                                TeacherService.class
+                                TERManagerService.class
+                                TERService.class
+        generated-sources/
+            annotations/
+        generated-test-sources/
+            test-annotations/
+        maven-status/
+            maven-compiler-plugin/
+                compile/
+                    default-compile/
+                        createdFiles.lst
+                        inputFiles.lst
+                testCompile/
+                    default-testCompile/
+                        createdFiles.lst
+                        inputFiles.lst
+        surefire-reports/
+            TEST-um.fds.agl.ter23.repositories.TeacherRepositoryTest.xml
+            TEST-um.fds.agl.ter23.Ter23ApplicationTests.xml
+            um.fds.agl.ter23.repositories.TeacherRepositoryTest.txt
+            um.fds.agl.ter23.Ter23ApplicationTests.txt
+        test-classes/
+            um/
+                fds/
+                    agl/
+                        ter23/
+                            Ter23ApplicationTests.class
+                            controller/
+                                TeacherControllerTest.class
+                            repositories/
+                                TeacherRepositoryTest.class
+
+c:\Users\tommi\Documents\Projets\aglter24\pom.xml :
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.6.7</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>um.fds.agl</groupId>
+	<artifactId>ter23</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>ter23</name>
+	<description>TER project with Spring Boot</description>
+	<properties>
+		<java.version>11</java.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-rest</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-crypto -->
+
+
+
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
+		</dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+    </dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>11</source>
+					<target>11</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${project.parent.version}</version>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\.idea\compiler.xml :
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="ter23" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ter24" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="ter23" options="-parameters" />
+    </option>
+  </component>
+</project>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\.idea\encodings.xml :
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+  </component>
+</project>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\.idea\jarRepositories.xml :
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteRepositoriesConfiguration">
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Central Repository" />
+      <option name="url" value="https://repo.maven.apache.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Maven Central repository" />
+      <option name="url" value="https://repo1.maven.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="jboss.community" />
+      <option name="name" value="JBoss Community repository" />
+      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+    </remote-repository>
+  </component>
+</project>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\.idea\misc.xml :
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_19" default="true" project-jdk-name="openjdk-19" project-jdk-type="JavaSDK" />
+</project>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\.idea\vcs.xml :
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/../../.." vcs="Git" />
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+  </component>
+</project>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\.idea\workspace.xml :
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ed5c04e2-40c2-471b-9755-4f66f0a84266" name="Changes" comment="aglter24 crud ter 2" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2VLMLWqeKpf5xVwHPVhdO1EsP6n" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-19&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/cefco/Desktop/prog/GIT_FAC/L3/Prog_L3/2_L3/AGL/aglter24&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;85c4076c4dfdfc7c7e3d0b7dacd82870&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager" selected="Spring Boot.Ter24Application">
+    <configuration name="TeacherControllerTest.addTeacherGet" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ter23" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="um.fds.agl.ter23.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="um.fds.agl.ter23.controller" />
+      <option name="MAIN_CLASS_NAME" value="um.fds.agl.ter23.controller.TeacherControllerTest" />
+      <option name="METHOD_NAME" value="addTeacherGet" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TeacherControllerTest.addTeacherPostExistingTeacher" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ter23" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="um.fds.agl.ter23.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="um.fds.agl.ter23.controller" />
+      <option name="MAIN_CLASS_NAME" value="um.fds.agl.ter23.controller.TeacherControllerTest" />
+      <option name="METHOD_NAME" value="addTeacherPostExistingTeacher" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TeacherControllerTest.addTeacherPostNonExistingTeacher" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ter23" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="um.fds.agl.ter23.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="um.fds.agl.ter23.controller" />
+      <option name="MAIN_CLASS_NAME" value="um.fds.agl.ter23.controller.TeacherControllerTest" />
+      <option name="METHOD_NAME" value="addTeacherPostNonExistingTeacher" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TeacherControllerTest.addTeacherexisting" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ter23" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="um.fds.agl.ter23.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="um.fds.agl.ter23.controller" />
+      <option name="MAIN_CLASS_NAME" value="um.fds.agl.ter23.controller.TeacherControllerTest" />
+      <option name="METHOD_NAME" value="addTeacherexisting" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="aglter23" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="aglter23" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Ter23Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="ter23" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="um.fds.agl.ter23.Ter23Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Ter24Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="ter23" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="um.fds.agl.ter24.Ter24Application" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="um.fds.agl.ter24.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.Ter24Application" />
+        <item itemvalue="JUnit.TeacherControllerTest.addTeacherPostExistingTeacher" />
+        <item itemvalue="JUnit.TeacherControllerTest.addTeacherPostNonExistingTeacher" />
+        <item itemvalue="JUnit.TeacherControllerTest.addTeacherexisting" />
+        <item itemvalue="JUnit.TeacherControllerTest.addTeacherGet" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ed5c04e2-40c2-471b-9755-4f66f0a84266" name="Changes" comment="" />
+      <created>1694610856276</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1694610856276</updated>
+      <workItem from="1694610857351" duration="7327000" />
+      <workItem from="1695217458274" duration="31000" />
+      <workItem from="1695224317644" duration="178000" />
+      <workItem from="1695224527310" duration="29000" />
+      <workItem from="1695224600632" duration="945000" />
+      <workItem from="1695734580722" duration="128000" />
+      <workItem from="1695821133637" duration="207000" />
+      <workItem from="1695821924341" duration="3165000" />
+      <workItem from="1698054235321" duration="9574000" />
+      <workItem from="1698070732046" duration="608000" />
+      <workItem from="1726160640685" duration="1423000" />
+      <workItem from="1726162411802" duration="1281000" />
+      <workItem from="1726165896400" duration="865000" />
+      <workItem from="1726166901922" duration="445000" />
+      <workItem from="1726167432030" duration="124000" />
+      <workItem from="1726167567289" duration="130000" />
+      <workItem from="1726167716328" duration="67000" />
+    </task>
+    <task id="LOCAL-00001" summary="debut du crud sujet">
+      <option name="closed" value="true" />
+      <created>1694621338564</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1694621338564</updated>
+    </task>
+    <task id="LOCAL-00002" summary="altg23 start">
+      <option name="closed" value="true" />
+      <created>1695224928265</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1695224928265</updated>
+    </task>
+    <task id="LOCAL-00003" summary="aglter23 start 2">
+      <option name="closed" value="true" />
+      <created>1695224957914</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1695224957914</updated>
+    </task>
+    <task id="LOCAL-00004" summary="aglter23gitignore">
+      <option name="closed" value="true" />
+      <created>1695225431248</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1695225431248</updated>
+    </task>
+    <task id="LOCAL-00005" summary="aglter23">
+      <option name="closed" value="true" />
+      <created>1695225519909</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1695225519909</updated>
+    </task>
+    <task id="LOCAL-00006" summary="aglter23 avec sujet (pas fait moi meme a comprendre)">
+      <option name="closed" value="true" />
+      <created>1695822463612</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1695822463612</updated>
+    </task>
+    <task id="LOCAL-00007" summary="aglter23 j'essaie de créer une branche">
+      <option name="closed" value="true" />
+      <created>1695825089382</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1695825089382</updated>
+    </task>
+    <task id="LOCAL-00008" summary="aglter23 a jour sur mon pc main">
+      <created>1698054275625</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1698054275626</updated>
+    </task>
+    <task id="LOCAL-00009" summary="aglter23 td4 fini">
+      <created>1698067026822</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1698067026822</updated>
+    </task>
+    <task id="LOCAL-00010" summary="aglter24 crud ter">
+      <created>1726167737318</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1726167737318</updated>
+    </task>
+    <task id="LOCAL-00011" summary="aglter24 crud ter 2">
+      <created>1726167766187</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1726167766187</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="debut du crud sujet" />
+    <MESSAGE value="altg23 start" />
+    <MESSAGE value="aglter23 start 2" />
+    <MESSAGE value="aglter23gitignore" />
+    <MESSAGE value="aglter23" />
+    <MESSAGE value="aglter23  ????" />
+    <MESSAGE value="aglter23 a jour sur mon pc main" />
+    <MESSAGE value="aglter23 td4 fini" />
+    <MESSAGE value="aglter24 crud ter" />
+    <MESSAGE value="aglter24 crud ter 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="aglter24 crud ter 2" />
+  </component>
+</project>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\DatabaseLoader.java :
+```
+package um.fds.agl.ter24;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
+import um.fds.agl.ter24.entities.*;
+import um.fds.agl.ter24.repositories.*;
+
+@Component
+public class DatabaseLoader implements CommandLineRunner {
+    private final TeacherRepository teachers;
+    private final TERManagerRepository managers;
+    private final StudentRepository students;
+    private final TERRepository ter;
+
+
+    @Autowired
+    public DatabaseLoader(TeacherRepository teachers, TERManagerRepository managers, StudentRepository students, TERRepository ter) {
+        this.teachers = teachers;
+        this.managers = managers;
+        this.students = students;
+        this.ter = ter;
+    }
+
+    @Override
+    public void run(String... strings) throws Exception {
+        TERManager terM1Manager = this.managers.save(new TERManager("Le", "Chef", "mdp", "ROLE_MANAGER"));
+        SecurityContextHolder.getContext().setAuthentication(
+                new UsernamePasswordAuthenticationToken("Chef", "bigre",
+                        AuthorityUtils.createAuthorityList("ROLE_MANAGER"))); // the actual password is not needed here
+        Teacher teacher1 = new Teacher("Ada", "Lovelace", "lovelace", terM1Manager, "ROLE_TEACHER");
+        Teacher teacher2 = new Teacher("Alan", "Turing", "turing", terM1Manager, "ROLE_TEACHER");
+        Teacher teacher3 = new Teacher("Leslie", "Lamport", "lamport", terM1Manager, "ROLE_TEACHER");
+        this.teachers.save(teacher1);
+        this.teachers.save(teacher2);
+        this.teachers.save(teacher3);
+        this.students.save(new Student("Gustave", "Flaubert"));
+        this.students.save(new Student("Frédéric", "Chopin"));
+        this.ter.save(new TER(teacher1, "Maths"));
+        this.ter.save(new TER(teacher1, "Maths & co"));
+        this.ter.save(new TER(teacher2, "Info"));
+
+        SecurityContextHolder.clearContext();
+
+    }
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\SecurityConfiguration.java :
+```
+package um.fds.agl.ter24;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import um.fds.agl.ter24.entities.UserTER;
+import um.fds.agl.ter24.services.SpringDataJpaUserDetailsService;
+
+@Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private SpringDataJpaUserDetailsService userDetailsService;
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .userDetailsService(this.userDetailsService)
+                .passwordEncoder(UserTER.PASSWORD_ENCODER);
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                .antMatchers("/built/**", "/main.css").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .defaultSuccessUrl("/", true)
+                .permitAll()
+                .and()
+                .httpBasic()
+                .and()
+                .csrf().disable()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login");
+    }
+
+}
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\Ter24Application.java :
+```
+package um.fds.agl.ter24;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class Ter24Application {
+
+	public static void main(String[] args) {
+		SpringApplication.run(Ter24Application.class, args);
+	}
+
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\controllers\HomeController.java :
+```
+package um.fds.agl.ter24.controllers;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+@Controller
+public class HomeController {
+    @RequestMapping(value = "/") // support of the "/" route
+    public String index() {
+        return "index"; // index is the name of the template, the view resolver will map it into src/main/resources/templates/index.html.
+    }
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\controllers\StudentController.java :
+```
+package um.fds.agl.ter24.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import um.fds.agl.ter24.entities.Student;
+import um.fds.agl.ter24.forms.StudentForm;
+import um.fds.agl.ter24.services.StudentService;
+import um.fds.agl.ter24.services.TeacherService;
+
+@Controller
+public class StudentController{
+
+    @Autowired
+    private TeacherService teacherService;
+    @Autowired
+    private StudentService studentService;
+
+    @GetMapping("/listStudents")
+    public Iterable<Student> getStudents(Model model) {
+        model.addAttribute("students", studentService.getStudents());
+        return studentService.getStudents();
+    }
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    @GetMapping(value = { "/addStudent" })
+    public String showAddPersonPage(Model model) {
+
+        StudentForm studentForm = new StudentForm();
+        model.addAttribute("studentForm", studentForm);
+
+        return "addStudent";
+    }
+
+    @PostMapping(value = { "/addStudent"})
+    public String addStudent(Model model, @ModelAttribute("StudentForm") StudentForm studentForm) {
+        Student student;
+        if(studentService.findById(studentForm.getId()).isPresent()){
+            student = studentService.findById(studentForm.getId()).get();
+            student.setFirstName(studentForm.getFirstName());
+            student.setLastName(studentForm.getLastName());
+        } else {
+            student = new Student(studentForm.getFirstName(), studentForm.getLastName());
+        }
+        studentService.saveStudent(student);
+        return "redirect:/listStudents";
+
+    }
+
+    @GetMapping(value = {"/showStudentUpdateForm/{id}"})
+    public String showStudentUpdateForm(Model model, @PathVariable(value = "id") long id){
+
+        StudentForm studentForm = new StudentForm(id, studentService.findById(id).get().getFirstName(), studentService.findById(id).get().getLastName());
+        model.addAttribute("studentForm", studentForm);
+        return "updateStudent";
+    }
+
+    @GetMapping(value = {"/deleteStudent/{id}"})
+    public String deleteStudent(Model model, @PathVariable(value = "id") long id){
+        studentService.deleteStudent(id);
+        return "redirect:/listStudents";
+    }
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\controllers\TeacherController.java :
+```
+package um.fds.agl.ter24.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import um.fds.agl.ter24.services.TERManagerService;
+import um.fds.agl.ter24.entities.Teacher;
+import um.fds.agl.ter24.forms.TeacherForm;
+import um.fds.agl.ter24.services.TeacherService;
+
+@Controller
+public class TeacherController {
+
+    @Autowired
+    private TeacherService teacherService;
+    @Autowired
+    private TERManagerService terManagerService;
+
+    @GetMapping("/listTeachers")
+    public Iterable<Teacher> getTeachers(Model model) {
+        Iterable<Teacher> teachers=teacherService.getTeachers();
+        model.addAttribute("teachers", teachers);
+        return teachers;
+    }
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    @GetMapping(value = { "/addTeacher" })
+    public String showAddTeacherPage(Model model) {
+
+        TeacherForm teacherForm = new TeacherForm();
+        model.addAttribute("teacherForm", teacherForm);
+
+        return "addTeacher";
+    }
+
+    @PostMapping(value = { "/addTeacher"})
+    public String addTeacher(Model model, @ModelAttribute("TeacherForm") TeacherForm teacherForm) {
+        Teacher t;
+        if(teacherService.findById(teacherForm.getId()).isPresent()){
+            // teacher already existing : update
+            t = teacherService.findById(teacherForm.getId()).get();
+            t.setFirstName(teacherForm.getFirstName());
+            t.setLastName(teacherForm.getLastName());
+        } else {
+            // teacher not existing : create
+            t=new Teacher(teacherForm.getFirstName(), teacherForm.getLastName(), terManagerService.getTERManager());
+        }
+        teacherService.saveTeacher(t);
+        return "redirect:/listTeachers";
+
+    }
+
+    @GetMapping(value = {"/showTeacherUpdateForm/{id}"})
+    public String showTeacherUpdateForm(Model model, @PathVariable(value = "id") long id){
+
+        TeacherForm teacherForm = new TeacherForm(id, teacherService.findById(id).get().getFirstName(), teacherService.findById(id).get().getLastName());
+        model.addAttribute("teacherForm", teacherForm);
+        return "updateTeacher";
+    }
+
+    @GetMapping(value = {"/deleteTeacher/{id}"})
+    public String deleteTeacher(Model model, @PathVariable(value = "id") long id){
+        teacherService.deleteTeacher(id);
+        return "redirect:/listTeachers";
+    }
+
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\controllers\TERController.java :
+```
+package um.fds.agl.ter24.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Role;
+import org.springframework.context.support.BeanDefinitionDsl;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import um.fds.agl.ter24.entities.TER;
+import um.fds.agl.ter24.entities.Teacher;
+import um.fds.agl.ter24.forms.TERForm;
+import um.fds.agl.ter24.repositories.TeacherRepository;
+import um.fds.agl.ter24.services.TERService;
+import um.fds.agl.ter24.services.TeacherService;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+@Controller
+public class TERController {
+
+    @Autowired
+    private TERService terService;
+
+    @Autowired
+    private TeacherService teacherService;
+
+    public TERController(TERService terService, TeacherService teacherService) {
+        this.terService = terService;
+        this.teacherService = teacherService;
+    }
+
+    @GetMapping("/listTERs")
+    public Iterable<TER> getTERs(Model model) {
+        model.addAttribute("TER", terService.getTERs());
+        return terService.getTERs();
+    }
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_TEACHER')")
+    @GetMapping(value = { "/addTER" })
+    public String showAddTERPage(Model model, Authentication authentication) {
+        TERForm TERForm = new TERForm();
+        model.addAttribute("TERForm", TERForm);
+        model.addAttribute("teachers", getTeachers(authentication));
+
+        return "addTER";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER') or (@teacherService.getTeacher(#TERForm?.teacher).get()?.lastName == authentication.name)")
+    @PostMapping(value = { "/addTER"})
+    public String addTER(Model model, @ModelAttribute("TERForm") TERForm TERForm) {
+        TER TER;
+        Teacher teacher = teacherService.getTeacher(TERForm.getTeacher()).get();
+        if(terService.findById(TERForm.getId()).isPresent()){
+            TER = terService.findById(TERForm.getId()).get();
+            TER.setSubject(TERForm.getSubject());
+            TER.setTeacher(teacher);
+        } else {
+            TER = new TER(teacher, TERForm.getSubject());
+        }
+        terService.saveTER(TER);
+        return "redirect:/listTERs";
+
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER') or (@teacherService.getTeacher(@TERService.findById(#id).get()?.teacher.id).get()?.lastName == authentication.name)")
+    @GetMapping(value = {"/showTERUpdateForm/{id}"})
+    public String showTERUpdateForm(Model model, @PathVariable(value = "id") long id, Authentication authentication){
+        TERForm TERForm = new TERForm(id, terService.findById(id).get().getTeacher().getId(), terService.findById(id).get().getSubject());
+        model.addAttribute("TERForm", TERForm);
+        model.addAttribute("teachers", getTeachers(authentication));
+        return "updateTER";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER') or (@teacherService.getTeacher(@TERService.findById(#id).get()?.teacher.id).get()?.lastName == authentication.name)")
+    @GetMapping(value = {"/deleteTER/{id}"})
+    public String deleteTER(Model model, @PathVariable(value = "id") long id){
+        terService.deleteTER(id);
+        return "redirect:/listTERs";
+    }
+
+    private List<Teacher> getTeachers(Authentication authentication) {
+        Iterable<Teacher> teacherIterable = teacherService.getTeachers();
+        List<Teacher> teachers = new ArrayList<>();
+        if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_MANAGER"))) teacherIterable.forEach(teachers::add);
+        else {
+            teacherIterable.forEach(teacher -> {
+                if(Objects.equals(teacher.getLastName(), authentication.getName()))
+                    teachers.add(teacher);
+            });
+        }
+        return teachers;
+    }
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\entities\Student.java :
+```
+package um.fds.agl.ter24.entities;
+
+import javax.persistence.Entity;
+
+@Entity
+public class Student extends UserTER{
+
+    // ici on mettra le groupe
+
+    public Student(String firstName, String lastName){
+        super(firstName, lastName);
+        String[] roles={"ROLE_STUDENT"};
+        this.setRoles(roles);
+    }
+
+    public Student(long id, String firstName, String lastName) {
+        super(id, firstName, lastName);
+        String[] roles = {"ROLE_STUDENT"};
+        this.setRoles(roles);
+    }
+    public Student() {}
+
+
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\entities\Sujet.java :
+```
+package um.fds.agl.ter24.entities;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.persistence.*;
+
+@Entity
+public class Sujet {
+    private  @Id    @GeneratedValue String titre;
+    private @OneToOne Teacher teacher;
+
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
+
+    public String getTitre() {
+        return titre;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\entities\Teacher.java :
+```
+package um.fds.agl.ter24.entities;
+
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class Teacher extends UserTER {
+    private @ManyToOne TERManager terManager;
+    public Teacher(){}
+    public Teacher(String firstName, String lastName, String password, TERManager manager, String... roles) {
+        super(firstName, lastName, password, roles);
+        this.terManager=manager;
+    }
+
+    public Teacher(String firstName, String lastName, TERManager manager) {
+        super(firstName, lastName);
+        String[] roles={"ROLE_TEACHER"};
+        this.setRoles(roles);
+        this.terManager=manager;
+    }
+
+
+    public TERManager getTerManager() {
+        return terManager;
+    }
+
+    public void setTerManager(TERManager terManager) {
+        this.terManager = terManager;
+    }
+
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "id=" + getId() +
+                ", firstName='" + getFirstName() + '\'' +
+                ", lastName='" + getLastName() + '\'' +
+                ", manager='"+ getTerManager() + '\'' +
+                '}';
+    }
+
+    public String Name() {
+        return getFirstName() + ' ' + getLastName();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Teacher)) return false;
+        if (!super.equals(o)) return false;
+
+        Teacher teacher = (Teacher) o;
+
+        return getTerManager() != null ? getTerManager().equals(teacher.getTerManager()) : teacher.getTerManager() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (getTerManager() != null ? getTerManager().hashCode() : 0);
+        return result;
+    }
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\entities\TER.java :
+```
+package um.fds.agl.ter24.entities;
+
+import javax.persistence.*;
+import java.util.Objects;
+
+@Entity
+public class TER {
+
+    private @Id
+    @GeneratedValue Long id;
+
+    @ManyToOne
+    private Teacher teacher;
+    private String subject;
+
+    public TER(Teacher teacher, String subject){
+        this.teacher = teacher;
+        this.subject = subject;
+    }
+
+    public TER(Long id, Teacher teacher, String subject) {
+        this(teacher, subject);
+        this.id = id;
+    }
+
+    public TER() {}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TER ter = (TER) o;
+        return teacher.equals(ter.teacher) && Objects.equals(subject, ter.subject);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(teacher, subject);
+    }
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\entities\TERManager.java :
+```
+package um.fds.agl.ter24.entities;
+
+import javax.persistence.Entity;
+import java.util.Arrays;
+
+@Entity
+public class TERManager extends UserTER {
+
+
+    public TERManager() {}
+
+    public TERManager(String firstName, String lastName, String password, String... roles) {
+        super(firstName,lastName,password, roles);
+    }
+
+
+
+
+
+
+
+
+    @Override
+    public String toString() {
+        return "Manager{" +
+                "id=" + getId()+
+                ", name='" + getLastName() + '\'' +
+                ", roles=" + Arrays.toString(getRoles()) +
+                '}';
+    }
+}
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\entities\UserTER.java :
+```
+package um.fds.agl.ter24.entities;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import java.util.Arrays;
+
+
+@Entity
+@Inheritance
+public abstract class UserTER {
+    public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
+
+    private @Id    @GeneratedValue Long id;
+    private String firstName;
+    private String lastName;
+    private @JsonIgnore String password;
+    private @JsonIgnore String[] roles;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = PASSWORD_ENCODER.encode(password);
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String[] getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String[] roles) {
+        this.roles = roles;
+    }
+
+    public UserTER(){}
+    public UserTER(String firstName, String lastName, String password, String[] roles) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        setPassword(password);
+        this.roles = roles;
+    }
+
+    public UserTER(String firstName, String lastName) {
+        //default : the password is the name, no role ...
+        this(firstName, lastName, lastName, new String[0]);
+    }
+
+    public UserTER(long id, String firstName, String lastName) {
+        //default : the password is the name, no role ...
+        this(firstName, lastName, lastName, new String[0]);
+        this.id = id;
+    }
+
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserTER)) return false;
+
+        UserTER user = (UserTER) o;
+
+        if (!getId().equals(user.getId())) return false;
+        if (!getFirstName().equals(user.getFirstName())) return false;
+        if (!getLastName().equals(user.getLastName())) return false;
+        if (!password.equals(user.password)) return false;
+        // Probably incorrect - comparing Object[] arrays with Arrays.equals
+        return Arrays.equals(roles, user.roles);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId().hashCode();
+        result = 31 * result + getFirstName().hashCode();
+        result = 31 * result + getLastName().hashCode();
+        result = 31 * result + password.hashCode();
+        result = 31 * result + Arrays.hashCode(roles);
+        return result;
+    }
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\forms\StudentForm.java :
+```
+package um.fds.agl.ter24.forms;
+
+public class StudentForm {
+    private String firstName;
+    private long id;
+    private String lastName;
+
+    public StudentForm(long id, String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.id = id;
+    }
+
+    public StudentForm() {
+
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\forms\TeacherForm.java :
+```
+package um.fds.agl.ter24.forms;
+
+public class TeacherForm {
+    private String firstName;
+    private String lastName;
+    private long id;
+
+    public TeacherForm(long id, String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.id = id;
+    }
+
+    public TeacherForm() {}
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\forms\TERForm.java :
+```
+package um.fds.agl.ter24.forms;
+
+import um.fds.agl.ter24.entities.Teacher;
+
+public class TERForm {
+    private Long teacher;
+    private long id;
+    private String subject;
+
+    public TERForm(long id, Long teacher, String subject) {
+        this.teacher = teacher;
+        this.subject = subject;
+        this.id = id;
+    }
+
+    public TERForm() {
+
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Long getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Long teacher) {
+        this.teacher = teacher;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\repositories\StudentRepository.java :
+```
+package um.fds.agl.ter24.repositories;
+
+import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.prepost.PreAuthorize;
+import um.fds.agl.ter24.entities.Student;
+
+public interface StudentRepository extends UserBaseRepository<Student> {
+
+    @Override
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    Student save(@Param("student") Student student);
+
+    @Override
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    void deleteById(@Param("id") Long id);
+
+    @Override
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    void delete(@Param("student") Student student);
+}
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\repositories\SujetRepository.java :
+```
+package um.fds.agl.ter24.repositories;
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+import um.fds.agl.ter24.entities.Sujet;
+@Repository
+public interface SujetRepository extends CrudRepository<Sujet, Long> {
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\repositories\TeacherRepository.java :
+```
+package um.fds.agl.ter24.repositories;
+
+import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.prepost.PreAuthorize;
+import um.fds.agl.ter24.entities.Teacher;
+
+
+public interface TeacherRepository extends UserBaseRepository<Teacher> {
+    @Override
+    @PreAuthorize("hasRole('ROLE_MANAGER') and (#teacher?.terManager == null or #teacher?.terManager?.lastName == authentication?.name)")
+    Teacher save(@Param("teacher") Teacher teacher);
+
+    @Override
+    @PreAuthorize("@teacherRepository.findById(#id).get()?.terManager?.lastName == authentication?.name")
+    void deleteById(@Param("id") Long id);
+
+    @Override
+    @PreAuthorize("#teacher?.terManager?.lastName == authentication?.name")
+    void delete(@Param("teacher") Teacher teacher);
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\repositories\TERManagerRepository.java :
+```
+package um.fds.agl.ter24.repositories;
+
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import um.fds.agl.ter24.entities.TERManager;
+
+@RepositoryRestResource(exported = false)
+public interface TERManagerRepository extends  UserBaseRepository<TERManager> {
+
+    TERManager save(TERManager manager);
+
+    public TERManager findByLastName(String lastName);
+
+    Iterable<TERManager> findAll();
+
+
+}
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\repositories\TERRepository.java :
+```
+package um.fds.agl.ter24.repositories;
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.prepost.PreAuthorize;
+import um.fds.agl.ter24.entities.TER;
+
+public interface TERRepository extends CrudRepository<TER, Long> {
+
+    @Override
+    @PreAuthorize("hasRole('ROLE_MANAGER') or (#ter?.teacher.lastName == authentication?.name)")
+    TER save(@Param("ter") TER ter);
+
+    @Override
+    @PreAuthorize("hasRole('ROLE_MANAGER') or (@TERRepository.findById(#id).get()?.teacher.lastName == authentication?.name)")
+    void deleteById(@Param("id") Long id);
+
+    @Override
+    @PreAuthorize("hasRole('ROLE_MANAGER') or (#ter?.teacher.lastName == authentication?.name)")
+    void delete(@Param("ter") TER ter);
+    
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\repositories\UserBaseRepository.java :
+```
+package um.fds.agl.ter24.repositories;
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.NoRepositoryBean;
+import um.fds.agl.ter24.entities.UserTER;
+
+@NoRepositoryBean
+public interface UserBaseRepository<T extends UserTER>
+        extends CrudRepository<T, Long> {
+
+    public T findByLastName(String lastName);
+
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\repositories\UserTERRepository.java :
+```
+package um.fds.agl.ter24.repositories;
+
+import um.fds.agl.ter24.entities.UserTER;
+
+public interface UserTERRepository extends UserBaseRepository<UserTER> { }
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\services\SpringDataJpaUserDetailsService.java :
+```
+package um.fds.agl.ter24.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import um.fds.agl.ter24.entities.UserTER;
+import um.fds.agl.ter24.repositories.UserTERRepository;
+
+@Component
+public class SpringDataJpaUserDetailsService implements UserDetailsService {
+
+    private final UserTERRepository repository;
+
+    @Autowired
+    public SpringDataJpaUserDetailsService(UserTERRepository repository) {
+        this.repository = repository;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
+        UserTER user = this.repository.findByLastName(name);
+        if (user == null) {
+            throw new UsernameNotFoundException(name);
+        }
+        return new User(user.getLastName(), user.getPassword(),
+                AuthorityUtils.createAuthorityList(user.getRoles()));
+    }
+
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\services\StudentService.java :
+```
+package um.fds.agl.ter24.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import um.fds.agl.ter24.entities.Student;
+import um.fds.agl.ter24.repositories.StudentRepository;
+
+import java.util.Optional;
+
+
+@Service
+public class StudentService {
+
+    @Autowired
+    private StudentRepository studentRepository;
+
+    public Optional<Student> getStudent(final Long id) {
+        return studentRepository.findById(id);
+    }
+
+    public Iterable<Student> getStudents() {
+        return studentRepository.findAll();
+    }
+
+    public void deleteStudent(final Long id) {
+        studentRepository.deleteById(id);
+    }
+
+    public Student saveStudent(Student student) {
+        Student savedStudent = studentRepository.save(student);
+        return savedStudent;
+    }
+
+    public Optional<Student> findById(long id) {
+        return studentRepository.findById(id);
+    }
+}
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\services\TeacherService.java :
+```
+package um.fds.agl.ter24.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import um.fds.agl.ter24.entities.Teacher;
+import um.fds.agl.ter24.repositories.TeacherRepository;
+
+import java.util.Optional;
+
+
+
+@Service
+public class TeacherService {
+
+    @Autowired
+    private TeacherRepository teacherRepository;
+
+    public Optional<Teacher> getTeacher(final Long id) {
+        return teacherRepository.findById(id);
+    }
+
+    public Iterable<Teacher> getTeachers() {
+        return teacherRepository.findAll();
+    }
+
+    public Teacher findByLastName(String name){return teacherRepository.findByLastName(name);}
+
+    public void deleteTeacher(final Long id) {
+        teacherRepository.deleteById(id);
+    }
+
+    public Teacher saveTeacher(Teacher teacher) {
+        Teacher savedTeacher = teacherRepository.save(teacher);
+        return savedTeacher;
+    }
+
+    public Optional<Teacher> findById(long id) {
+        return teacherRepository.findById(id);
+    }
+
+}
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\services\TERManagerService.java :
+```
+package um.fds.agl.ter24.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import um.fds.agl.ter24.entities.TERManager;
+import um.fds.agl.ter24.repositories.TERManagerRepository;
+
+
+@Service
+public class TERManagerService {
+    @Autowired
+    private TERManagerRepository terManagerRepository;
+
+    public TERManager getTERManager() {
+        return terManagerRepository.findAll().iterator().next();
+    }
+
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\services\TERService.java :
+```
+package um.fds.agl.ter24.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import um.fds.agl.ter24.entities.TER;
+import um.fds.agl.ter24.repositories.TERRepository;
+
+import java.util.Optional;
+
+@Service
+public class TERService {
+
+
+    @Autowired
+    private TERRepository terRepository;
+
+    public Optional<TER> getTER(final Long id) {
+        return terRepository.findById(id);
+    }
+
+    public Iterable<TER> getTERs() {
+        return terRepository.findAll();
+    }
+
+    public void deleteTER(final Long id) {
+        terRepository.deleteById(id);
+    }
+
+    public TER saveTER(TER ter) {
+        return terRepository.save(ter);
+    }
+
+    public Optional<TER> findById(long id) {
+        return terRepository.findById(id);
+    }
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\resources\static\main.css :
+```
+input.field {
+    width: 90%;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 1px solid #999;
+    padding: 0.5rem;
+    text-align: left;
+}
+
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\resources\templates\addStudent.html :
+```
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add Student</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>Create a Student:</h1>
+
+<form th:action="@{/addStudent}"
+      th:object="${studentForm}" method="POST">
+    First Name:
+    <input type="text" th:field="*{firstName}"/>
+    <br/>
+    Last Name:
+    <input type="text" th:field="*{lastName}"/>
+    <br/>
+    <input type="submit" value="Create"/>
+</form>
+
+<br/>
+
+<!-- Check if errorMessage is not null and not empty -->
+
+<div th:if="${errorMessage}" th:utext="${errorMessage}"
+     style="color:red;font-style:italic;">
+    ...
+</div>
+
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\resources\templates\addTeacher.html :
+```
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add Teacher</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>Create a Teacher:</h1>
+
+<form th:action="@{/addTeacher}"
+      th:object="${teacherForm}" method="POST">
+    First Name:
+    <input type="text" th:field="*{firstName}"/>
+    <br/>
+    Last Name:
+    <input type="text" th:field="*{lastName}"/>
+    <br/>
+    <input type="submit" value="Create"/>
+</form>
+
+<br/>
+
+<!-- Check if errorMessage is not null and not empty -->
+
+<div th:if="${errorMessage}" th:utext="${errorMessage}"
+     style="color:red;font-style:italic;">
+    ...
+</div>
+
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\resources\templates\addTER.html :
+```
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add TER</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>Create a TER:</h1>
+
+<form th:action="@{/addTER}"
+      th:object="${TERForm}" method="POST">
+    Teacher:
+    <select th:field="*{teacher}">
+        <option th:each="option: ${teachers}" th:text="${option.Name()}" th:value="${option.id}">...</option>
+    </select>
+    <br/>
+    Subject:
+    <input type="text" th:field="*{subject}"/>
+    <br/>
+    <input type="submit" value="Create"/>
+</form>
+
+<br/>
+
+<!-- Check if errorMessage is not null and not empty -->
+
+<div th:if="${errorMessage}" th:utext="${errorMessage}"
+     style="color:red;font-style:italic;">
+    ...
+</div>
+
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\resources\templates\error.html :
+```
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/main.css" />
+    <title>Error</title>
+</head>
+<body>
+<h1>Oups</h1>
+<h2>Quelque chose s'est mal passé, nous n'avons pas pu traiter votre demande.</h2>
+<a href="/">Retourner à l'accueil</a>
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\resources\templates\index.html :
+```
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head lang="fr">
+    <meta charset="UTF-8"/>
+    <title>Page des TER de M1</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>Page des TER de M1</h1>
+(cette page est un peu aride !)
+<br/>
+
+
+<a th:href="@{/listTeachers}">Teachers List</a>
+<br/>
+<a th:href="@{/listStudents}">Students List</a>
+<br/>
+<a th:href="@{/listTERs}">TER List</a>
+<br/>
+<br/>
+<a th:href="@{/logout}">Logout</a>
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\resources\templates\listStudents.html :
+```
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Student List</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>Student List</h1>
+<a href="/">Accueil</a>
+<a href="addStudent">Add Students</a>
+<br/><br/>
+<div>
+    <table border="1">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+        </tr>
+        <tr th:each ="student : ${students}">
+            <td th:utext="${student.firstName}">...</td>
+            <td th:utext="${student.lastName}">...</td>
+            <td><a th:href="@{/showStudentUpdateForm/{id}(id=${student.id})}">Update</a>
+                <a th:href="@{/deleteStudent/{id}(id=${student.id})}">Delete</a></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\resources\templates\listTeachers.html :
+```
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Teacher List</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>Teacher List</h1>
+<a href="/">Accueil</a>
+<a href="addTeacher">Add Teachers</a>
+<br/><br/>
+<div>
+    <table border="1">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+        </tr>
+        <tr th:each ="teacher : ${teachers}">
+            <td th:utext="${teacher.firstName}">...</td>
+            <td th:utext="${teacher.lastName}">...</td>
+            <td><a th:href="@{/showTeacherUpdateForm/{id}(id=${teacher.id})}">Update</a>
+                <a th:href="@{/deleteTeacher/{id}(id=${teacher.id})}">Delete</a></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\resources\templates\listTERs.html :
+```
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>TER List</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>TER List</h1>
+<a href="/">Accueil</a>
+<a href="addTER">Add TER</a>
+<br/><br/>
+<div>
+    <table border="1">
+        <tr>
+            <th>Teacher</th>
+            <th>Subject</th>
+        </tr>
+        <tr th:each ="TER : ${TER}">
+            <td th:utext="${TER.teacher.Name()}">...</td>
+            <td th:utext="${TER.subject}">...</td>
+            <td><a th:href="@{/showTERUpdateForm/{id}(id=${TER.id})}">Update</a>
+                <a th:href="@{/deleteTER/{id}(id=${TER.id})}">Delete</a></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\resources\templates\updateStudent.html :
+```
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Update Student</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>Update a Student:</h1>
+
+<form th:action="@{/addStudent}"
+      th:object="${studentForm}" method="POST">
+    <input type="hidden" th:field="*{id}" />
+    First Name:
+    <input type="text" th:field="*{firstName}"/>
+    <br/>
+    Last Name:
+    <input type="text" th:field="*{lastName}"/>
+    <br/>
+    <input type="submit" value="Update"/>
+</form>
+
+<br/>
+
+<!-- Check if errorMessage is not null and not empty -->
+
+<div th:if="${errorMessage}" th:utext="${errorMessage}"
+     style="color:red;font-style:italic;">
+    ...
+</div>
+
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\resources\templates\updateTeacher.html :
+```
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Update Student</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>Update a Teacher</h1>
+
+<form th:action="@{/addTeacher}"
+      th:object="${teacherForm}" method="POST">
+    <input type="hidden" th:field="*{id}" />
+    First Name:
+    <input type="text" th:field="*{firstName}"/>
+    <br/>
+    Last Name:
+    <input type="text" th:field="*{lastName}"/>
+    <br/>
+    <input type="submit" value="Update"/>
+</form>
+
+<br/>
+
+<!-- Check if errorMessage is not null and not empty -->
+
+<div th:if="${errorMessage}" th:utext="${errorMessage}"
+     style="color:red;font-style:italic;">
+    ...
+</div>
+
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\resources\templates\updateTER.html :
+```
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Update TER</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>Update a TER:</h1>
+
+<form th:action="@{/addTER}"
+      th:object="${TERForm}" method="POST">
+    <input type="hidden" th:field="*{id}" />
+    Teacher:
+    <select th:field="*{teacher}">
+        <option th:each="option: ${teachers}" th:text="${option.Name()}" th:value="${option.id}">...</option>
+    </select>
+    <br/>
+    Subject:
+    <input type="text" th:field="*{subject}"/>
+    <br/>
+    <input type="submit" value="Update"/>
+</form>
+
+<br/>
+
+<!-- Check if errorMessage is not null and not empty -->
+
+<div th:if="${errorMessage}" th:utext="${errorMessage}"
+     style="color:red;font-style:italic;">
+    ...
+</div>
+
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\test\java\um\fds\agl\ter24\Ter24ApplicationTests.java :
+```
+package um.fds.agl.ter24;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class Ter24ApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\test\java\um\fds\agl\ter24\controllers\TeacherControllerTest.java :
+```
+package um.fds.agl.ter24.controllers;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import um.fds.agl.ter24.entities.TERManager;
+import um.fds.agl.ter24.entities.Teacher;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.*;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import static org.junit.jupiter.api.Assumptions.assumingThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+@ExtendWith(SpringExtension.class)
+@SpringBootTest
+@AutoConfigureMockMvc
+class TeacherControllerTest{
+    @Autowired
+    private MockMvc mvc;
+
+    @Test
+    @WithMockUser(username = "Chef", roles = "MANAGER")
+    void addTeacherGet() throws Exception {
+        MvcResult result = mvc.perform(get("/addTeacher"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("text/html;charset=UTF-8"))
+                .andExpect(view().name("addTeacher"))
+                .andReturn();
+    }
+
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\test\java\um\fds\agl\ter24\repositories\TeacherRepositoryTest.java :
+```
+package um.fds.agl.ter24.repositories;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import um.fds.agl.ter24.entities.TERManager;
+import um.fds.agl.ter24.entities.Teacher;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+@ExtendWith(SpringExtension.class)
+@SpringBootTest
+class TeacherRepositoryTest {
+    @Autowired
+    private TeacherRepository teachers;
+    @Autowired
+    private TERManagerRepository managers;
+
+
+    @Test
+    void savingTeachersIsPossibleForManager() {
+        SecurityContextHolder.getContext().setAuthentication(
+                new UsernamePasswordAuthenticationToken("lechef", "peu importe", AuthorityUtils.createAuthorityList("ROLE_MANAGER")));
+                        TERManager terM1Manager = new TERManager("Mathieu", "lechef",
+                        "mdp", "ROLE_MANAGER");
+        this.managers.save(terM1Manager);
+        this.teachers.save(new Teacher("Margaret", "Hamilton", "margaret",
+                terM1Manager, "ROLE_TEACHER"));
+        assertThat(teachers.findByLastName("Hamilton"), is(notNullValue()));
+    }
+
+    @Test
+    void TeachersIsConnect() {
+        SecurityContextHolder.getContext().setAuthentication(
+                new UsernamePasswordAuthenticationToken("lechef", "peu importe", AuthorityUtils.createAuthorityList("ROLE_MANAGER")));
+        TERManager terM1Manager = new TERManager("Mathieu", "lechef",
+                "mdp", "ROLE_MANAGER");
+        this.managers.save(terM1Manager);
+        this.teachers.save(new Teacher("Margaret", "Hamilton", "margaret",
+                terM1Manager, "ROLE_TEACHER"));
+        assertThat(teachers.findByLastName("Hamilton"), is(notNullValue()));
+    }
+
+
+
+
+    @Test
+    void save() {
+    }
+
+    @Test
+    void deleteById() {
+    }
+
+    @Test
+    void delete() {
+    }
+}
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\target\classes\static\main.css :
+```
+input.field {
+    width: 90%;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 1px solid #999;
+    padding: 0.5rem;
+    text-align: left;
+}
+
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\target\classes\templates\addStudent.html :
+```
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add Student</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>Create a Student:</h1>
+
+<form th:action="@{/addStudent}"
+      th:object="${studentForm}" method="POST">
+    First Name:
+    <input type="text" th:field="*{firstName}"/>
+    <br/>
+    Last Name:
+    <input type="text" th:field="*{lastName}"/>
+    <br/>
+    <input type="submit" value="Create"/>
+</form>
+
+<br/>
+
+<!-- Check if errorMessage is not null and not empty -->
+
+<div th:if="${errorMessage}" th:utext="${errorMessage}"
+     style="color:red;font-style:italic;">
+    ...
+</div>
+
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\target\classes\templates\addTeacher.html :
+```
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add Teacher</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>Create a Teacher:</h1>
+
+<form th:action="@{/addTeacher}"
+      th:object="${teacherForm}" method="POST">
+    First Name:
+    <input type="text" th:field="*{firstName}"/>
+    <br/>
+    Last Name:
+    <input type="text" th:field="*{lastName}"/>
+    <br/>
+    <input type="submit" value="Create"/>
+</form>
+
+<br/>
+
+<!-- Check if errorMessage is not null and not empty -->
+
+<div th:if="${errorMessage}" th:utext="${errorMessage}"
+     style="color:red;font-style:italic;">
+    ...
+</div>
+
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\target\classes\templates\addTER.html :
+```
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add TER</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>Create a TER:</h1>
+
+<form th:action="@{/addTER}"
+      th:object="${TERForm}" method="POST">
+    Teacher:
+    <select th:field="*{teacher}">
+        <option th:each="option: ${teachers}" th:text="${option.Name()}" th:value="${option.id}">...</option>
+    </select>
+    <br/>
+    Subject:
+    <input type="text" th:field="*{subject}"/>
+    <br/>
+    <input type="submit" value="Create"/>
+</form>
+
+<br/>
+
+<!-- Check if errorMessage is not null and not empty -->
+
+<div th:if="${errorMessage}" th:utext="${errorMessage}"
+     style="color:red;font-style:italic;">
+    ...
+</div>
+
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\target\classes\templates\error.html :
+```
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/main.css" />
+    <title>Error</title>
+</head>
+<body>
+<h1>Oups</h1>
+<h2>Quelque chose s'est mal passé, nous n'avons pas pu traiter votre demande.</h2>
+<a href="/">Retourner à l'accueil</a>
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\target\classes\templates\index.html :
+```
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head lang="fr">
+    <meta charset="UTF-8"/>
+    <title>Page des TER de M1</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>Page des TER de M1</h1>
+(cette page est un peu aride !)
+<br/>
+
+
+<a th:href="@{/listTeachers}">Teachers List</a>
+<br/>
+<a th:href="@{/listStudents}">Students List</a>
+<br/>
+<a th:href="@{/listTERs}">TER List</a>
+<br/>
+<br/>
+<a th:href="@{/logout}">Logout</a>
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\target\classes\templates\listStudents.html :
+```
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Student List</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>Student List</h1>
+<a href="/">Accueil</a>
+<a href="addStudent">Add Students</a>
+<br/><br/>
+<div>
+    <table border="1">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+        </tr>
+        <tr th:each ="student : ${students}">
+            <td th:utext="${student.firstName}">...</td>
+            <td th:utext="${student.lastName}">...</td>
+            <td><a th:href="@{/showStudentUpdateForm/{id}(id=${student.id})}">Update</a>
+                <a th:href="@{/deleteStudent/{id}(id=${student.id})}">Delete</a></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\target\classes\templates\listTeachers.html :
+```
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Teacher List</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>Teacher List</h1>
+<a href="/">Accueil</a>
+<a href="addTeacher">Add Teachers</a>
+<br/><br/>
+<div>
+    <table border="1">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+        </tr>
+        <tr th:each ="teacher : ${teachers}">
+            <td th:utext="${teacher.firstName}">...</td>
+            <td th:utext="${teacher.lastName}">...</td>
+            <td><a th:href="@{/showTeacherUpdateForm/{id}(id=${teacher.id})}">Update</a>
+                <a th:href="@{/deleteTeacher/{id}(id=${teacher.id})}">Delete</a></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\target\classes\templates\listTERs.html :
+```
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>TER List</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>TER List</h1>
+<a href="/">Accueil</a>
+<a href="addTER">Add TER</a>
+<br/><br/>
+<div>
+    <table border="1">
+        <tr>
+            <th>Teacher</th>
+            <th>Subject</th>
+        </tr>
+        <tr th:each ="TER : ${TER}">
+            <td th:utext="${TER.teacher.Name()}">...</td>
+            <td th:utext="${TER.subject}">...</td>
+            <td><a th:href="@{/showTERUpdateForm/{id}(id=${TER.id})}">Update</a>
+                <a th:href="@{/deleteTER/{id}(id=${TER.id})}">Delete</a></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\target\classes\templates\updateStudent.html :
+```
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Update Student</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>Update a Student:</h1>
+
+<form th:action="@{/addStudent}"
+      th:object="${studentForm}" method="POST">
+    <input type="hidden" th:field="*{id}" />
+    First Name:
+    <input type="text" th:field="*{firstName}"/>
+    <br/>
+    Last Name:
+    <input type="text" th:field="*{lastName}"/>
+    <br/>
+    <input type="submit" value="Update"/>
+</form>
+
+<br/>
+
+<!-- Check if errorMessage is not null and not empty -->
+
+<div th:if="${errorMessage}" th:utext="${errorMessage}"
+     style="color:red;font-style:italic;">
+    ...
+</div>
+
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\target\classes\templates\updateTeacher.html :
+```
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Update Student</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>Update a Teacher</h1>
+
+<form th:action="@{/addTeacher}"
+      th:object="${teacherForm}" method="POST">
+    <input type="hidden" th:field="*{id}" />
+    First Name:
+    <input type="text" th:field="*{firstName}"/>
+    <br/>
+    Last Name:
+    <input type="text" th:field="*{lastName}"/>
+    <br/>
+    <input type="submit" value="Update"/>
+</form>
+
+<br/>
+
+<!-- Check if errorMessage is not null and not empty -->
+
+<div th:if="${errorMessage}" th:utext="${errorMessage}"
+     style="color:red;font-style:italic;">
+    ...
+</div>
+
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\target\classes\templates\updateTER.html :
+```
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Update TER</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>Update a TER:</h1>
+
+<form th:action="@{/addTER}"
+      th:object="${TERForm}" method="POST">
+    <input type="hidden" th:field="*{id}" />
+    Teacher:
+    <select th:field="*{teacher}">
+        <option th:each="option: ${teachers}" th:text="${option.Name()}" th:value="${option.id}">...</option>
+    </select>
+    <br/>
+    Subject:
+    <input type="text" th:field="*{subject}"/>
+    <br/>
+    <input type="submit" value="Update"/>
+</form>
+
+<br/>
+
+<!-- Check if errorMessage is not null and not empty -->
+
+<div th:if="${errorMessage}" th:utext="${errorMessage}"
+     style="color:red;font-style:italic;">
+    ...
+</div>
+
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\target\surefire-reports\TEST-um.fds.agl.ter23.repositories.TeacherRepositoryTest.xml :
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="um.fds.agl.ter23.repositories.TeacherRepositoryTest" time="5.29" tests="2" errors="1" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="20"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\cefco\Desktop\prog\[GIT]_FAC\L3\agl\aglter23\target\test-classes;C:\Users\cefco\Desktop\prog\[GIT]_FAC\L3\agl\aglter23\target\classes;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-data-jpa\2.6.7\spring-boot-starter-data-jpa-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-aop\2.6.7\spring-boot-starter-aop-2.6.7.jar;C:\Users\cefco\.m2\repository\org\aspectj\aspectjweaver\1.9.7\aspectjweaver-1.9.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\2.6.7\spring-boot-starter-jdbc-2.6.7.jar;C:\Users\cefco\.m2\repository\com\zaxxer\HikariCP\4.0.3\HikariCP-4.0.3.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-jdbc\5.3.19\spring-jdbc-5.3.19.jar;C:\Users\cefco\.m2\repository\jakarta\transaction\jakarta.transaction-api\1.3.3\jakarta.transaction-api-1.3.3.jar;C:\Users\cefco\.m2\repository\jakarta\persistence\jakarta.persistence-api\2.2.3\jakarta.persistence-api-2.2.3.jar;C:\Users\cefco\.m2\repository\org\hibernate\hibernate-core\5.6.8.Final\hibernate-core-5.6.8.Final.jar;C:\Users\cefco\.m2\repository\org\jboss\logging\jboss-logging\3.4.3.Final\jboss-logging-3.4.3.Final.jar;C:\Users\cefco\.m2\repository\net\bytebuddy\byte-buddy\1.11.22\byte-buddy-1.11.22.jar;C:\Users\cefco\.m2\repository\antlr\antlr\2.7.7\antlr-2.7.7.jar;C:\Users\cefco\.m2\repository\org\jboss\jandex\2.4.2.Final\jandex-2.4.2.Final.jar;C:\Users\cefco\.m2\repository\com\fasterxml\classmate\1.5.1\classmate-1.5.1.jar;C:\Users\cefco\.m2\repository\org\hibernate\common\hibernate-commons-annotations\5.1.2.Final\hibernate-commons-annotations-5.1.2.Final.jar;C:\Users\cefco\.m2\repository\org\glassfish\jaxb\jaxb-runtime\2.3.6\jaxb-runtime-2.3.6.jar;C:\Users\cefco\.m2\repository\org\glassfish\jaxb\txw2\2.3.6\txw2-2.3.6.jar;C:\Users\cefco\.m2\repository\com\sun\istack\istack-commons-runtime\3.0.12\istack-commons-runtime-3.0.12.jar;C:\Users\cefco\.m2\repository\com\sun\activation\jakarta.activation\1.2.2\jakarta.activation-1.2.2.jar;C:\Users\cefco\.m2\repository\org\springframework\data\spring-data-jpa\2.6.4\spring-data-jpa-2.6.4.jar;C:\Users\cefco\.m2\repository\org\springframework\data\spring-data-commons\2.6.4\spring-data-commons-2.6.4.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-orm\5.3.19\spring-orm-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-context\5.3.19\spring-context-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-tx\5.3.19\spring-tx-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-beans\5.3.19\spring-beans-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-aspects\5.3.19\spring-aspects-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-data-rest\2.6.7\spring-boot-starter-data-rest-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-web\2.6.7\spring-boot-starter-web-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-json\2.6.7\spring-boot-starter-json-2.6.7.jar;C:\Users\cefco\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.13.2\jackson-datatype-jdk8-2.13.2.jar;C:\Users\cefco\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.13.2\jackson-datatype-jsr310-2.13.2.jar;C:\Users\cefco\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.13.2\jackson-module-parameter-names-2.13.2.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\2.6.7\spring-boot-starter-tomcat-2.6.7.jar;C:\Users\cefco\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\9.0.62\tomcat-embed-core-9.0.62.jar;C:\Users\cefco\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\9.0.62\tomcat-embed-el-9.0.62.jar;C:\Users\cefco\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\9.0.62\tomcat-embed-websocket-9.0.62.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-web\5.3.19\spring-web-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-webmvc\5.3.19\spring-webmvc-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\data\spring-data-rest-webmvc\3.6.4\spring-data-rest-webmvc-3.6.4.jar;C:\Users\cefco\.m2\repository\org\springframework\data\spring-data-rest-core\3.6.4\spring-data-rest-core-3.6.4.jar;C:\Users\cefco\.m2\repository\org\springframework\hateoas\spring-hateoas\1.4.2\spring-hateoas-1.4.2.jar;C:\Users\cefco\.m2\repository\org\springframework\plugin\spring-plugin-core\2.0.0.RELEASE\spring-plugin-core-2.0.0.RELEASE.jar;C:\Users\cefco\.m2\repository\org\atteo\evo-inflector\1.3\evo-inflector-1.3.jar;C:\Users\cefco\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.13.2.1\jackson-databind-2.13.2.1.jar;C:\Users\cefco\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.13.2\jackson-core-2.13.2.jar;C:\Users\cefco\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.13.2\jackson-annotations-2.13.2.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-thymeleaf\2.6.7\spring-boot-starter-thymeleaf-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter\2.6.7\spring-boot-starter-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot\2.6.7\spring-boot-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\2.6.7\spring-boot-autoconfigure-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-logging\2.6.7\spring-boot-starter-logging-2.6.7.jar;C:\Users\cefco\.m2\repository\ch\qos\logback\logback-classic\1.2.11\logback-classic-1.2.11.jar;C:\Users\cefco\.m2\repository\ch\qos\logback\logback-core\1.2.11\logback-core-1.2.11.jar;C:\Users\cefco\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.17.2\log4j-to-slf4j-2.17.2.jar;C:\Users\cefco\.m2\repository\org\apache\logging\log4j\log4j-api\2.17.2\log4j-api-2.17.2.jar;C:\Users\cefco\.m2\repository\org\slf4j\jul-to-slf4j\1.7.36\jul-to-slf4j-1.7.36.jar;C:\Users\cefco\.m2\repository\jakarta\annotation\jakarta.annotation-api\1.3.5\jakarta.annotation-api-1.3.5.jar;C:\Users\cefco\.m2\repository\org\yaml\snakeyaml\1.29\snakeyaml-1.29.jar;C:\Users\cefco\.m2\repository\org\thymeleaf\thymeleaf-spring5\3.0.15.RELEASE\thymeleaf-spring5-3.0.15.RELEASE.jar;C:\Users\cefco\.m2\repository\org\thymeleaf\thymeleaf\3.0.15.RELEASE\thymeleaf-3.0.15.RELEASE.jar;C:\Users\cefco\.m2\repository\org\attoparser\attoparser\2.0.5.RELEASE\attoparser-2.0.5.RELEASE.jar;C:\Users\cefco\.m2\repository\org\unbescape\unbescape\1.1.6.RELEASE\unbescape-1.1.6.RELEASE.jar;C:\Users\cefco\.m2\repository\org\thymeleaf\extras\thymeleaf-extras-java8time\3.0.4.RELEASE\thymeleaf-extras-java8time-3.0.4.RELEASE.jar;C:\Users\cefco\.m2\repository\com\h2database\h2\1.4.200\h2-1.4.200.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-test\2.6.7\spring-boot-starter-test-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-test\2.6.7\spring-boot-test-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\2.6.7\spring-boot-test-autoconfigure-2.6.7.jar;C:\Users\cefco\.m2\repository\com\jayway\jsonpath\json-path\2.6.0\json-path-2.6.0.jar;C:\Users\cefco\.m2\repository\net\minidev\json-smart\2.4.8\json-smart-2.4.8.jar;C:\Users\cefco\.m2\repository\net\minidev\accessors-smart\2.4.8\accessors-smart-2.4.8.jar;C:\Users\cefco\.m2\repository\org\ow2\asm\asm\9.1\asm-9.1.jar;C:\Users\cefco\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\2.3.3\jakarta.xml.bind-api-2.3.3.jar;C:\Users\cefco\.m2\repository\jakarta\activation\jakarta.activation-api\1.2.2\jakarta.activation-api-1.2.2.jar;C:\Users\cefco\.m2\repository\org\assertj\assertj-core\3.21.0\assertj-core-3.21.0.jar;C:\Users\cefco\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\cefco\.m2\repository\org\junit\jupiter\junit-jupiter\5.8.2\junit-jupiter-5.8.2.jar;C:\Users\cefco\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.8.2\junit-jupiter-api-5.8.2.jar;C:\Users\cefco\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\cefco\.m2\repository\org\junit\platform\junit-platform-commons\1.8.2\junit-platform-commons-1.8.2.jar;C:\Users\cefco\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\cefco\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.8.2\junit-jupiter-params-5.8.2.jar;C:\Users\cefco\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.8.2\junit-jupiter-engine-5.8.2.jar;C:\Users\cefco\.m2\repository\org\junit\platform\junit-platform-engine\1.8.2\junit-platform-engine-1.8.2.jar;C:\Users\cefco\.m2\repository\org\mockito\mockito-core\4.0.0\mockito-core-4.0.0.jar;C:\Users\cefco\.m2\repository\net\bytebuddy\byte-buddy-agent\1.11.22\byte-buddy-agent-1.11.22.jar;C:\Users\cefco\.m2\repository\org\objenesis\objenesis\3.2\objenesis-3.2.jar;C:\Users\cefco\.m2\repository\org\mockito\mockito-junit-jupiter\4.0.0\mockito-junit-jupiter-4.0.0.jar;C:\Users\cefco\.m2\repository\org\skyscreamer\jsonassert\1.5.0\jsonassert-1.5.0.jar;C:\Users\cefco\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-core\5.3.19\spring-core-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-jcl\5.3.19\spring-jcl-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-test\5.3.19\spring-test-5.3.19.jar;C:\Users\cefco\.m2\repository\org\xmlunit\xmlunit-core\2.8.4\xmlunit-core-2.8.4.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-security\2.6.7\spring-boot-starter-security-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-aop\5.3.19\spring-aop-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\security\spring-security-config\5.6.3\spring-security-config-5.6.3.jar;C:\Users\cefco\.m2\repository\org\springframework\security\spring-security-core\5.6.3\spring-security-core-5.6.3.jar;C:\Users\cefco\.m2\repository\org\springframework\security\spring-security-crypto\5.6.3\spring-security-crypto-5.6.3.jar;C:\Users\cefco\.m2\repository\org\springframework\security\spring-security-web\5.6.3\spring-security-web-5.6.3.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-expression\5.3.19\spring-expression-5.3.19.jar;C:\Users\cefco\.m2\repository\org\thymeleaf\extras\thymeleaf-extras-springsecurity5\3.0.4.RELEASE\thymeleaf-extras-springsecurity5-3.0.4.RELEASE.jar;C:\Users\cefco\.m2\repository\org\slf4j\slf4j-api\1.7.36\slf4j-api-1.7.36.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Europe/Paris"/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="java.vm.specification.version" value="20"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="FR"/>
+    <property name="sun.boot.library.path" value="C:\Users\cefco\.jdks\openjdk-20.0.1\bin"/>
+    <property name="sun.java.command" value="C:\Users\cefco\AppData\Local\Temp\surefire14684468258410605424\surefirebooter11714841179757708028.jar C:\Users\cefco\AppData\Local\Temp\surefire14684468258410605424 2023-10-23T11-47-55_948-jvmRun1 surefire12965598746585051848tmp surefire_01569242491177950362tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\cefco\Desktop\prog\[GIT]_FAC\L3\agl\aglter23\target\test-classes;C:\Users\cefco\Desktop\prog\[GIT]_FAC\L3\agl\aglter23\target\classes;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-data-jpa\2.6.7\spring-boot-starter-data-jpa-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-aop\2.6.7\spring-boot-starter-aop-2.6.7.jar;C:\Users\cefco\.m2\repository\org\aspectj\aspectjweaver\1.9.7\aspectjweaver-1.9.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\2.6.7\spring-boot-starter-jdbc-2.6.7.jar;C:\Users\cefco\.m2\repository\com\zaxxer\HikariCP\4.0.3\HikariCP-4.0.3.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-jdbc\5.3.19\spring-jdbc-5.3.19.jar;C:\Users\cefco\.m2\repository\jakarta\transaction\jakarta.transaction-api\1.3.3\jakarta.transaction-api-1.3.3.jar;C:\Users\cefco\.m2\repository\jakarta\persistence\jakarta.persistence-api\2.2.3\jakarta.persistence-api-2.2.3.jar;C:\Users\cefco\.m2\repository\org\hibernate\hibernate-core\5.6.8.Final\hibernate-core-5.6.8.Final.jar;C:\Users\cefco\.m2\repository\org\jboss\logging\jboss-logging\3.4.3.Final\jboss-logging-3.4.3.Final.jar;C:\Users\cefco\.m2\repository\net\bytebuddy\byte-buddy\1.11.22\byte-buddy-1.11.22.jar;C:\Users\cefco\.m2\repository\antlr\antlr\2.7.7\antlr-2.7.7.jar;C:\Users\cefco\.m2\repository\org\jboss\jandex\2.4.2.Final\jandex-2.4.2.Final.jar;C:\Users\cefco\.m2\repository\com\fasterxml\classmate\1.5.1\classmate-1.5.1.jar;C:\Users\cefco\.m2\repository\org\hibernate\common\hibernate-commons-annotations\5.1.2.Final\hibernate-commons-annotations-5.1.2.Final.jar;C:\Users\cefco\.m2\repository\org\glassfish\jaxb\jaxb-runtime\2.3.6\jaxb-runtime-2.3.6.jar;C:\Users\cefco\.m2\repository\org\glassfish\jaxb\txw2\2.3.6\txw2-2.3.6.jar;C:\Users\cefco\.m2\repository\com\sun\istack\istack-commons-runtime\3.0.12\istack-commons-runtime-3.0.12.jar;C:\Users\cefco\.m2\repository\com\sun\activation\jakarta.activation\1.2.2\jakarta.activation-1.2.2.jar;C:\Users\cefco\.m2\repository\org\springframework\data\spring-data-jpa\2.6.4\spring-data-jpa-2.6.4.jar;C:\Users\cefco\.m2\repository\org\springframework\data\spring-data-commons\2.6.4\spring-data-commons-2.6.4.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-orm\5.3.19\spring-orm-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-context\5.3.19\spring-context-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-tx\5.3.19\spring-tx-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-beans\5.3.19\spring-beans-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-aspects\5.3.19\spring-aspects-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-data-rest\2.6.7\spring-boot-starter-data-rest-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-web\2.6.7\spring-boot-starter-web-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-json\2.6.7\spring-boot-starter-json-2.6.7.jar;C:\Users\cefco\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.13.2\jackson-datatype-jdk8-2.13.2.jar;C:\Users\cefco\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.13.2\jackson-datatype-jsr310-2.13.2.jar;C:\Users\cefco\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.13.2\jackson-module-parameter-names-2.13.2.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\2.6.7\spring-boot-starter-tomcat-2.6.7.jar;C:\Users\cefco\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\9.0.62\tomcat-embed-core-9.0.62.jar;C:\Users\cefco\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\9.0.62\tomcat-embed-el-9.0.62.jar;C:\Users\cefco\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\9.0.62\tomcat-embed-websocket-9.0.62.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-web\5.3.19\spring-web-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-webmvc\5.3.19\spring-webmvc-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\data\spring-data-rest-webmvc\3.6.4\spring-data-rest-webmvc-3.6.4.jar;C:\Users\cefco\.m2\repository\org\springframework\data\spring-data-rest-core\3.6.4\spring-data-rest-core-3.6.4.jar;C:\Users\cefco\.m2\repository\org\springframework\hateoas\spring-hateoas\1.4.2\spring-hateoas-1.4.2.jar;C:\Users\cefco\.m2\repository\org\springframework\plugin\spring-plugin-core\2.0.0.RELEASE\spring-plugin-core-2.0.0.RELEASE.jar;C:\Users\cefco\.m2\repository\org\atteo\evo-inflector\1.3\evo-inflector-1.3.jar;C:\Users\cefco\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.13.2.1\jackson-databind-2.13.2.1.jar;C:\Users\cefco\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.13.2\jackson-core-2.13.2.jar;C:\Users\cefco\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.13.2\jackson-annotations-2.13.2.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-thymeleaf\2.6.7\spring-boot-starter-thymeleaf-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter\2.6.7\spring-boot-starter-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot\2.6.7\spring-boot-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\2.6.7\spring-boot-autoconfigure-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-logging\2.6.7\spring-boot-starter-logging-2.6.7.jar;C:\Users\cefco\.m2\repository\ch\qos\logback\logback-classic\1.2.11\logback-classic-1.2.11.jar;C:\Users\cefco\.m2\repository\ch\qos\logback\logback-core\1.2.11\logback-core-1.2.11.jar;C:\Users\cefco\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.17.2\log4j-to-slf4j-2.17.2.jar;C:\Users\cefco\.m2\repository\org\apache\logging\log4j\log4j-api\2.17.2\log4j-api-2.17.2.jar;C:\Users\cefco\.m2\repository\org\slf4j\jul-to-slf4j\1.7.36\jul-to-slf4j-1.7.36.jar;C:\Users\cefco\.m2\repository\jakarta\annotation\jakarta.annotation-api\1.3.5\jakarta.annotation-api-1.3.5.jar;C:\Users\cefco\.m2\repository\org\yaml\snakeyaml\1.29\snakeyaml-1.29.jar;C:\Users\cefco\.m2\repository\org\thymeleaf\thymeleaf-spring5\3.0.15.RELEASE\thymeleaf-spring5-3.0.15.RELEASE.jar;C:\Users\cefco\.m2\repository\org\thymeleaf\thymeleaf\3.0.15.RELEASE\thymeleaf-3.0.15.RELEASE.jar;C:\Users\cefco\.m2\repository\org\attoparser\attoparser\2.0.5.RELEASE\attoparser-2.0.5.RELEASE.jar;C:\Users\cefco\.m2\repository\org\unbescape\unbescape\1.1.6.RELEASE\unbescape-1.1.6.RELEASE.jar;C:\Users\cefco\.m2\repository\org\thymeleaf\extras\thymeleaf-extras-java8time\3.0.4.RELEASE\thymeleaf-extras-java8time-3.0.4.RELEASE.jar;C:\Users\cefco\.m2\repository\com\h2database\h2\1.4.200\h2-1.4.200.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-test\2.6.7\spring-boot-starter-test-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-test\2.6.7\spring-boot-test-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\2.6.7\spring-boot-test-autoconfigure-2.6.7.jar;C:\Users\cefco\.m2\repository\com\jayway\jsonpath\json-path\2.6.0\json-path-2.6.0.jar;C:\Users\cefco\.m2\repository\net\minidev\json-smart\2.4.8\json-smart-2.4.8.jar;C:\Users\cefco\.m2\repository\net\minidev\accessors-smart\2.4.8\accessors-smart-2.4.8.jar;C:\Users\cefco\.m2\repository\org\ow2\asm\asm\9.1\asm-9.1.jar;C:\Users\cefco\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\2.3.3\jakarta.xml.bind-api-2.3.3.jar;C:\Users\cefco\.m2\repository\jakarta\activation\jakarta.activation-api\1.2.2\jakarta.activation-api-1.2.2.jar;C:\Users\cefco\.m2\repository\org\assertj\assertj-core\3.21.0\assertj-core-3.21.0.jar;C:\Users\cefco\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\cefco\.m2\repository\org\junit\jupiter\junit-jupiter\5.8.2\junit-jupiter-5.8.2.jar;C:\Users\cefco\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.8.2\junit-jupiter-api-5.8.2.jar;C:\Users\cefco\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\cefco\.m2\repository\org\junit\platform\junit-platform-commons\1.8.2\junit-platform-commons-1.8.2.jar;C:\Users\cefco\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\cefco\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.8.2\junit-jupiter-params-5.8.2.jar;C:\Users\cefco\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.8.2\junit-jupiter-engine-5.8.2.jar;C:\Users\cefco\.m2\repository\org\junit\platform\junit-platform-engine\1.8.2\junit-platform-engine-1.8.2.jar;C:\Users\cefco\.m2\repository\org\mockito\mockito-core\4.0.0\mockito-core-4.0.0.jar;C:\Users\cefco\.m2\repository\net\bytebuddy\byte-buddy-agent\1.11.22\byte-buddy-agent-1.11.22.jar;C:\Users\cefco\.m2\repository\org\objenesis\objenesis\3.2\objenesis-3.2.jar;C:\Users\cefco\.m2\repository\org\mockito\mockito-junit-jupiter\4.0.0\mockito-junit-jupiter-4.0.0.jar;C:\Users\cefco\.m2\repository\org\skyscreamer\jsonassert\1.5.0\jsonassert-1.5.0.jar;C:\Users\cefco\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-core\5.3.19\spring-core-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-jcl\5.3.19\spring-jcl-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-test\5.3.19\spring-test-5.3.19.jar;C:\Users\cefco\.m2\repository\org\xmlunit\xmlunit-core\2.8.4\xmlunit-core-2.8.4.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-security\2.6.7\spring-boot-starter-security-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-aop\5.3.19\spring-aop-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\security\spring-security-config\5.6.3\spring-security-config-5.6.3.jar;C:\Users\cefco\.m2\repository\org\springframework\security\spring-security-core\5.6.3\spring-security-core-5.6.3.jar;C:\Users\cefco\.m2\repository\org\springframework\security\spring-security-crypto\5.6.3\spring-security-crypto-5.6.3.jar;C:\Users\cefco\.m2\repository\org\springframework\security\spring-security-web\5.6.3\spring-security-web-5.6.3.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-expression\5.3.19\spring-expression-5.3.19.jar;C:\Users\cefco\.m2\repository\org\thymeleaf\extras\thymeleaf-extras-springsecurity5\3.0.4.RELEASE\thymeleaf-extras-springsecurity5-3.0.4.RELEASE.jar;C:\Users\cefco\.m2\repository\org\slf4j\slf4j-api\1.7.36\slf4j-api-1.7.36.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\cefco"/>
+    <property name="user.language" value="fr"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2023-04-18"/>
+    <property name="java.home" value="C:\Users\cefco\.jdks\openjdk-20.0.1"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\cefco\Desktop\prog\[GIT]_FAC\L3\agl\aglter23"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\cefco\AppData\Local\Temp\surefire14684468258410605424\surefirebooter11714841179757708028.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="20.0.1+9-29"/>
+    <property name="user.name" value="cefco"/>
+    <property name="stdout.encoding" value="Cp1252"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\cefco\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\cefco\AppData\Local\Temp\"/>
+    <property name="idea.version" value="2023.1.2"/>
+    <property name="java.version" value="20.0.1"/>
+    <property name="user.dir" value="C:\Users\cefco\Desktop\prog\[GIT]_FAC\L3\agl\aglter23"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Users\cefco\.jdks\openjdk-20.0.1\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\Users\cefco\AppData\Local\Microsoft\WindowsApps;C:\Users\cefco\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\cefco\AppData\Local\Programs\Python\Python311;;C:\Program Files\JetBrains\IntelliJ IDEA 2023.1.2\bin;;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1252"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="20.0.1+9-29"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="64.0"/>
+  </properties>
+  <testcase name="accessDeniedToTeacher" classname="um.fds.agl.ter23.repositories.TeacherRepositoryTest" time="0.254"/>
+  <testcase name="savingTeachersIsPossibleForManager" classname="um.fds.agl.ter23.repositories.TeacherRepositoryTest" time="0.12">
+    <error message="query did not return a unique result: 2; nested exception is javax.persistence.NonUniqueResultException: query did not return a unique result: 2" type="org.springframework.dao.IncorrectResultSizeDataAccessException">org.springframework.dao.IncorrectResultSizeDataAccessException: query did not return a unique result: 2; nested exception is javax.persistence.NonUniqueResultException: query did not return a unique result: 2
+	at um.fds.agl.ter23.repositories.TeacherRepositoryTest.savingTeachersIsPossibleForManager(TeacherRepositoryTest.java:39)
+Caused by: javax.persistence.NonUniqueResultException: query did not return a unique result: 2
+	at um.fds.agl.ter23.repositories.TeacherRepositoryTest.savingTeachersIsPossibleForManager(TeacherRepositoryTest.java:39)
+</error>
+  </testcase>
+</testsuite>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\target\surefire-reports\TEST-um.fds.agl.ter23.Ter23ApplicationTests.xml :
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="um.fds.agl.ter23.Ter23ApplicationTests" time="0.001" tests="1" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="20"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\cefco\Desktop\prog\[GIT]_FAC\L3\agl\aglter23\target\test-classes;C:\Users\cefco\Desktop\prog\[GIT]_FAC\L3\agl\aglter23\target\classes;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-data-jpa\2.6.7\spring-boot-starter-data-jpa-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-aop\2.6.7\spring-boot-starter-aop-2.6.7.jar;C:\Users\cefco\.m2\repository\org\aspectj\aspectjweaver\1.9.7\aspectjweaver-1.9.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\2.6.7\spring-boot-starter-jdbc-2.6.7.jar;C:\Users\cefco\.m2\repository\com\zaxxer\HikariCP\4.0.3\HikariCP-4.0.3.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-jdbc\5.3.19\spring-jdbc-5.3.19.jar;C:\Users\cefco\.m2\repository\jakarta\transaction\jakarta.transaction-api\1.3.3\jakarta.transaction-api-1.3.3.jar;C:\Users\cefco\.m2\repository\jakarta\persistence\jakarta.persistence-api\2.2.3\jakarta.persistence-api-2.2.3.jar;C:\Users\cefco\.m2\repository\org\hibernate\hibernate-core\5.6.8.Final\hibernate-core-5.6.8.Final.jar;C:\Users\cefco\.m2\repository\org\jboss\logging\jboss-logging\3.4.3.Final\jboss-logging-3.4.3.Final.jar;C:\Users\cefco\.m2\repository\net\bytebuddy\byte-buddy\1.11.22\byte-buddy-1.11.22.jar;C:\Users\cefco\.m2\repository\antlr\antlr\2.7.7\antlr-2.7.7.jar;C:\Users\cefco\.m2\repository\org\jboss\jandex\2.4.2.Final\jandex-2.4.2.Final.jar;C:\Users\cefco\.m2\repository\com\fasterxml\classmate\1.5.1\classmate-1.5.1.jar;C:\Users\cefco\.m2\repository\org\hibernate\common\hibernate-commons-annotations\5.1.2.Final\hibernate-commons-annotations-5.1.2.Final.jar;C:\Users\cefco\.m2\repository\org\glassfish\jaxb\jaxb-runtime\2.3.6\jaxb-runtime-2.3.6.jar;C:\Users\cefco\.m2\repository\org\glassfish\jaxb\txw2\2.3.6\txw2-2.3.6.jar;C:\Users\cefco\.m2\repository\com\sun\istack\istack-commons-runtime\3.0.12\istack-commons-runtime-3.0.12.jar;C:\Users\cefco\.m2\repository\com\sun\activation\jakarta.activation\1.2.2\jakarta.activation-1.2.2.jar;C:\Users\cefco\.m2\repository\org\springframework\data\spring-data-jpa\2.6.4\spring-data-jpa-2.6.4.jar;C:\Users\cefco\.m2\repository\org\springframework\data\spring-data-commons\2.6.4\spring-data-commons-2.6.4.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-orm\5.3.19\spring-orm-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-context\5.3.19\spring-context-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-tx\5.3.19\spring-tx-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-beans\5.3.19\spring-beans-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-aspects\5.3.19\spring-aspects-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-data-rest\2.6.7\spring-boot-starter-data-rest-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-web\2.6.7\spring-boot-starter-web-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-json\2.6.7\spring-boot-starter-json-2.6.7.jar;C:\Users\cefco\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.13.2\jackson-datatype-jdk8-2.13.2.jar;C:\Users\cefco\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.13.2\jackson-datatype-jsr310-2.13.2.jar;C:\Users\cefco\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.13.2\jackson-module-parameter-names-2.13.2.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\2.6.7\spring-boot-starter-tomcat-2.6.7.jar;C:\Users\cefco\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\9.0.62\tomcat-embed-core-9.0.62.jar;C:\Users\cefco\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\9.0.62\tomcat-embed-el-9.0.62.jar;C:\Users\cefco\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\9.0.62\tomcat-embed-websocket-9.0.62.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-web\5.3.19\spring-web-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-webmvc\5.3.19\spring-webmvc-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\data\spring-data-rest-webmvc\3.6.4\spring-data-rest-webmvc-3.6.4.jar;C:\Users\cefco\.m2\repository\org\springframework\data\spring-data-rest-core\3.6.4\spring-data-rest-core-3.6.4.jar;C:\Users\cefco\.m2\repository\org\springframework\hateoas\spring-hateoas\1.4.2\spring-hateoas-1.4.2.jar;C:\Users\cefco\.m2\repository\org\springframework\plugin\spring-plugin-core\2.0.0.RELEASE\spring-plugin-core-2.0.0.RELEASE.jar;C:\Users\cefco\.m2\repository\org\atteo\evo-inflector\1.3\evo-inflector-1.3.jar;C:\Users\cefco\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.13.2.1\jackson-databind-2.13.2.1.jar;C:\Users\cefco\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.13.2\jackson-core-2.13.2.jar;C:\Users\cefco\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.13.2\jackson-annotations-2.13.2.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-thymeleaf\2.6.7\spring-boot-starter-thymeleaf-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter\2.6.7\spring-boot-starter-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot\2.6.7\spring-boot-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\2.6.7\spring-boot-autoconfigure-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-logging\2.6.7\spring-boot-starter-logging-2.6.7.jar;C:\Users\cefco\.m2\repository\ch\qos\logback\logback-classic\1.2.11\logback-classic-1.2.11.jar;C:\Users\cefco\.m2\repository\ch\qos\logback\logback-core\1.2.11\logback-core-1.2.11.jar;C:\Users\cefco\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.17.2\log4j-to-slf4j-2.17.2.jar;C:\Users\cefco\.m2\repository\org\apache\logging\log4j\log4j-api\2.17.2\log4j-api-2.17.2.jar;C:\Users\cefco\.m2\repository\org\slf4j\jul-to-slf4j\1.7.36\jul-to-slf4j-1.7.36.jar;C:\Users\cefco\.m2\repository\jakarta\annotation\jakarta.annotation-api\1.3.5\jakarta.annotation-api-1.3.5.jar;C:\Users\cefco\.m2\repository\org\yaml\snakeyaml\1.29\snakeyaml-1.29.jar;C:\Users\cefco\.m2\repository\org\thymeleaf\thymeleaf-spring5\3.0.15.RELEASE\thymeleaf-spring5-3.0.15.RELEASE.jar;C:\Users\cefco\.m2\repository\org\thymeleaf\thymeleaf\3.0.15.RELEASE\thymeleaf-3.0.15.RELEASE.jar;C:\Users\cefco\.m2\repository\org\attoparser\attoparser\2.0.5.RELEASE\attoparser-2.0.5.RELEASE.jar;C:\Users\cefco\.m2\repository\org\unbescape\unbescape\1.1.6.RELEASE\unbescape-1.1.6.RELEASE.jar;C:\Users\cefco\.m2\repository\org\thymeleaf\extras\thymeleaf-extras-java8time\3.0.4.RELEASE\thymeleaf-extras-java8time-3.0.4.RELEASE.jar;C:\Users\cefco\.m2\repository\com\h2database\h2\1.4.200\h2-1.4.200.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-test\2.6.7\spring-boot-starter-test-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-test\2.6.7\spring-boot-test-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\2.6.7\spring-boot-test-autoconfigure-2.6.7.jar;C:\Users\cefco\.m2\repository\com\jayway\jsonpath\json-path\2.6.0\json-path-2.6.0.jar;C:\Users\cefco\.m2\repository\net\minidev\json-smart\2.4.8\json-smart-2.4.8.jar;C:\Users\cefco\.m2\repository\net\minidev\accessors-smart\2.4.8\accessors-smart-2.4.8.jar;C:\Users\cefco\.m2\repository\org\ow2\asm\asm\9.1\asm-9.1.jar;C:\Users\cefco\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\2.3.3\jakarta.xml.bind-api-2.3.3.jar;C:\Users\cefco\.m2\repository\jakarta\activation\jakarta.activation-api\1.2.2\jakarta.activation-api-1.2.2.jar;C:\Users\cefco\.m2\repository\org\assertj\assertj-core\3.21.0\assertj-core-3.21.0.jar;C:\Users\cefco\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\cefco\.m2\repository\org\junit\jupiter\junit-jupiter\5.8.2\junit-jupiter-5.8.2.jar;C:\Users\cefco\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.8.2\junit-jupiter-api-5.8.2.jar;C:\Users\cefco\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\cefco\.m2\repository\org\junit\platform\junit-platform-commons\1.8.2\junit-platform-commons-1.8.2.jar;C:\Users\cefco\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\cefco\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.8.2\junit-jupiter-params-5.8.2.jar;C:\Users\cefco\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.8.2\junit-jupiter-engine-5.8.2.jar;C:\Users\cefco\.m2\repository\org\junit\platform\junit-platform-engine\1.8.2\junit-platform-engine-1.8.2.jar;C:\Users\cefco\.m2\repository\org\mockito\mockito-core\4.0.0\mockito-core-4.0.0.jar;C:\Users\cefco\.m2\repository\net\bytebuddy\byte-buddy-agent\1.11.22\byte-buddy-agent-1.11.22.jar;C:\Users\cefco\.m2\repository\org\objenesis\objenesis\3.2\objenesis-3.2.jar;C:\Users\cefco\.m2\repository\org\mockito\mockito-junit-jupiter\4.0.0\mockito-junit-jupiter-4.0.0.jar;C:\Users\cefco\.m2\repository\org\skyscreamer\jsonassert\1.5.0\jsonassert-1.5.0.jar;C:\Users\cefco\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-core\5.3.19\spring-core-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-jcl\5.3.19\spring-jcl-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-test\5.3.19\spring-test-5.3.19.jar;C:\Users\cefco\.m2\repository\org\xmlunit\xmlunit-core\2.8.4\xmlunit-core-2.8.4.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-security\2.6.7\spring-boot-starter-security-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-aop\5.3.19\spring-aop-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\security\spring-security-config\5.6.3\spring-security-config-5.6.3.jar;C:\Users\cefco\.m2\repository\org\springframework\security\spring-security-core\5.6.3\spring-security-core-5.6.3.jar;C:\Users\cefco\.m2\repository\org\springframework\security\spring-security-crypto\5.6.3\spring-security-crypto-5.6.3.jar;C:\Users\cefco\.m2\repository\org\springframework\security\spring-security-web\5.6.3\spring-security-web-5.6.3.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-expression\5.3.19\spring-expression-5.3.19.jar;C:\Users\cefco\.m2\repository\org\thymeleaf\extras\thymeleaf-extras-springsecurity5\3.0.4.RELEASE\thymeleaf-extras-springsecurity5-3.0.4.RELEASE.jar;C:\Users\cefco\.m2\repository\org\slf4j\slf4j-api\1.7.36\slf4j-api-1.7.36.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Europe/Paris"/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="java.vm.specification.version" value="20"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="FR"/>
+    <property name="sun.boot.library.path" value="C:\Users\cefco\.jdks\openjdk-20.0.1\bin"/>
+    <property name="sun.java.command" value="C:\Users\cefco\AppData\Local\Temp\surefire14684468258410605424\surefirebooter11714841179757708028.jar C:\Users\cefco\AppData\Local\Temp\surefire14684468258410605424 2023-10-23T11-47-55_948-jvmRun1 surefire12965598746585051848tmp surefire_01569242491177950362tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\cefco\Desktop\prog\[GIT]_FAC\L3\agl\aglter23\target\test-classes;C:\Users\cefco\Desktop\prog\[GIT]_FAC\L3\agl\aglter23\target\classes;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-data-jpa\2.6.7\spring-boot-starter-data-jpa-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-aop\2.6.7\spring-boot-starter-aop-2.6.7.jar;C:\Users\cefco\.m2\repository\org\aspectj\aspectjweaver\1.9.7\aspectjweaver-1.9.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\2.6.7\spring-boot-starter-jdbc-2.6.7.jar;C:\Users\cefco\.m2\repository\com\zaxxer\HikariCP\4.0.3\HikariCP-4.0.3.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-jdbc\5.3.19\spring-jdbc-5.3.19.jar;C:\Users\cefco\.m2\repository\jakarta\transaction\jakarta.transaction-api\1.3.3\jakarta.transaction-api-1.3.3.jar;C:\Users\cefco\.m2\repository\jakarta\persistence\jakarta.persistence-api\2.2.3\jakarta.persistence-api-2.2.3.jar;C:\Users\cefco\.m2\repository\org\hibernate\hibernate-core\5.6.8.Final\hibernate-core-5.6.8.Final.jar;C:\Users\cefco\.m2\repository\org\jboss\logging\jboss-logging\3.4.3.Final\jboss-logging-3.4.3.Final.jar;C:\Users\cefco\.m2\repository\net\bytebuddy\byte-buddy\1.11.22\byte-buddy-1.11.22.jar;C:\Users\cefco\.m2\repository\antlr\antlr\2.7.7\antlr-2.7.7.jar;C:\Users\cefco\.m2\repository\org\jboss\jandex\2.4.2.Final\jandex-2.4.2.Final.jar;C:\Users\cefco\.m2\repository\com\fasterxml\classmate\1.5.1\classmate-1.5.1.jar;C:\Users\cefco\.m2\repository\org\hibernate\common\hibernate-commons-annotations\5.1.2.Final\hibernate-commons-annotations-5.1.2.Final.jar;C:\Users\cefco\.m2\repository\org\glassfish\jaxb\jaxb-runtime\2.3.6\jaxb-runtime-2.3.6.jar;C:\Users\cefco\.m2\repository\org\glassfish\jaxb\txw2\2.3.6\txw2-2.3.6.jar;C:\Users\cefco\.m2\repository\com\sun\istack\istack-commons-runtime\3.0.12\istack-commons-runtime-3.0.12.jar;C:\Users\cefco\.m2\repository\com\sun\activation\jakarta.activation\1.2.2\jakarta.activation-1.2.2.jar;C:\Users\cefco\.m2\repository\org\springframework\data\spring-data-jpa\2.6.4\spring-data-jpa-2.6.4.jar;C:\Users\cefco\.m2\repository\org\springframework\data\spring-data-commons\2.6.4\spring-data-commons-2.6.4.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-orm\5.3.19\spring-orm-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-context\5.3.19\spring-context-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-tx\5.3.19\spring-tx-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-beans\5.3.19\spring-beans-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-aspects\5.3.19\spring-aspects-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-data-rest\2.6.7\spring-boot-starter-data-rest-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-web\2.6.7\spring-boot-starter-web-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-json\2.6.7\spring-boot-starter-json-2.6.7.jar;C:\Users\cefco\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.13.2\jackson-datatype-jdk8-2.13.2.jar;C:\Users\cefco\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.13.2\jackson-datatype-jsr310-2.13.2.jar;C:\Users\cefco\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.13.2\jackson-module-parameter-names-2.13.2.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\2.6.7\spring-boot-starter-tomcat-2.6.7.jar;C:\Users\cefco\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\9.0.62\tomcat-embed-core-9.0.62.jar;C:\Users\cefco\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\9.0.62\tomcat-embed-el-9.0.62.jar;C:\Users\cefco\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\9.0.62\tomcat-embed-websocket-9.0.62.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-web\5.3.19\spring-web-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-webmvc\5.3.19\spring-webmvc-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\data\spring-data-rest-webmvc\3.6.4\spring-data-rest-webmvc-3.6.4.jar;C:\Users\cefco\.m2\repository\org\springframework\data\spring-data-rest-core\3.6.4\spring-data-rest-core-3.6.4.jar;C:\Users\cefco\.m2\repository\org\springframework\hateoas\spring-hateoas\1.4.2\spring-hateoas-1.4.2.jar;C:\Users\cefco\.m2\repository\org\springframework\plugin\spring-plugin-core\2.0.0.RELEASE\spring-plugin-core-2.0.0.RELEASE.jar;C:\Users\cefco\.m2\repository\org\atteo\evo-inflector\1.3\evo-inflector-1.3.jar;C:\Users\cefco\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.13.2.1\jackson-databind-2.13.2.1.jar;C:\Users\cefco\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.13.2\jackson-core-2.13.2.jar;C:\Users\cefco\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.13.2\jackson-annotations-2.13.2.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-thymeleaf\2.6.7\spring-boot-starter-thymeleaf-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter\2.6.7\spring-boot-starter-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot\2.6.7\spring-boot-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\2.6.7\spring-boot-autoconfigure-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-logging\2.6.7\spring-boot-starter-logging-2.6.7.jar;C:\Users\cefco\.m2\repository\ch\qos\logback\logback-classic\1.2.11\logback-classic-1.2.11.jar;C:\Users\cefco\.m2\repository\ch\qos\logback\logback-core\1.2.11\logback-core-1.2.11.jar;C:\Users\cefco\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.17.2\log4j-to-slf4j-2.17.2.jar;C:\Users\cefco\.m2\repository\org\apache\logging\log4j\log4j-api\2.17.2\log4j-api-2.17.2.jar;C:\Users\cefco\.m2\repository\org\slf4j\jul-to-slf4j\1.7.36\jul-to-slf4j-1.7.36.jar;C:\Users\cefco\.m2\repository\jakarta\annotation\jakarta.annotation-api\1.3.5\jakarta.annotation-api-1.3.5.jar;C:\Users\cefco\.m2\repository\org\yaml\snakeyaml\1.29\snakeyaml-1.29.jar;C:\Users\cefco\.m2\repository\org\thymeleaf\thymeleaf-spring5\3.0.15.RELEASE\thymeleaf-spring5-3.0.15.RELEASE.jar;C:\Users\cefco\.m2\repository\org\thymeleaf\thymeleaf\3.0.15.RELEASE\thymeleaf-3.0.15.RELEASE.jar;C:\Users\cefco\.m2\repository\org\attoparser\attoparser\2.0.5.RELEASE\attoparser-2.0.5.RELEASE.jar;C:\Users\cefco\.m2\repository\org\unbescape\unbescape\1.1.6.RELEASE\unbescape-1.1.6.RELEASE.jar;C:\Users\cefco\.m2\repository\org\thymeleaf\extras\thymeleaf-extras-java8time\3.0.4.RELEASE\thymeleaf-extras-java8time-3.0.4.RELEASE.jar;C:\Users\cefco\.m2\repository\com\h2database\h2\1.4.200\h2-1.4.200.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-test\2.6.7\spring-boot-starter-test-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-test\2.6.7\spring-boot-test-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\2.6.7\spring-boot-test-autoconfigure-2.6.7.jar;C:\Users\cefco\.m2\repository\com\jayway\jsonpath\json-path\2.6.0\json-path-2.6.0.jar;C:\Users\cefco\.m2\repository\net\minidev\json-smart\2.4.8\json-smart-2.4.8.jar;C:\Users\cefco\.m2\repository\net\minidev\accessors-smart\2.4.8\accessors-smart-2.4.8.jar;C:\Users\cefco\.m2\repository\org\ow2\asm\asm\9.1\asm-9.1.jar;C:\Users\cefco\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\2.3.3\jakarta.xml.bind-api-2.3.3.jar;C:\Users\cefco\.m2\repository\jakarta\activation\jakarta.activation-api\1.2.2\jakarta.activation-api-1.2.2.jar;C:\Users\cefco\.m2\repository\org\assertj\assertj-core\3.21.0\assertj-core-3.21.0.jar;C:\Users\cefco\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\cefco\.m2\repository\org\junit\jupiter\junit-jupiter\5.8.2\junit-jupiter-5.8.2.jar;C:\Users\cefco\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.8.2\junit-jupiter-api-5.8.2.jar;C:\Users\cefco\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\cefco\.m2\repository\org\junit\platform\junit-platform-commons\1.8.2\junit-platform-commons-1.8.2.jar;C:\Users\cefco\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\cefco\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.8.2\junit-jupiter-params-5.8.2.jar;C:\Users\cefco\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.8.2\junit-jupiter-engine-5.8.2.jar;C:\Users\cefco\.m2\repository\org\junit\platform\junit-platform-engine\1.8.2\junit-platform-engine-1.8.2.jar;C:\Users\cefco\.m2\repository\org\mockito\mockito-core\4.0.0\mockito-core-4.0.0.jar;C:\Users\cefco\.m2\repository\net\bytebuddy\byte-buddy-agent\1.11.22\byte-buddy-agent-1.11.22.jar;C:\Users\cefco\.m2\repository\org\objenesis\objenesis\3.2\objenesis-3.2.jar;C:\Users\cefco\.m2\repository\org\mockito\mockito-junit-jupiter\4.0.0\mockito-junit-jupiter-4.0.0.jar;C:\Users\cefco\.m2\repository\org\skyscreamer\jsonassert\1.5.0\jsonassert-1.5.0.jar;C:\Users\cefco\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-core\5.3.19\spring-core-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-jcl\5.3.19\spring-jcl-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-test\5.3.19\spring-test-5.3.19.jar;C:\Users\cefco\.m2\repository\org\xmlunit\xmlunit-core\2.8.4\xmlunit-core-2.8.4.jar;C:\Users\cefco\.m2\repository\org\springframework\boot\spring-boot-starter-security\2.6.7\spring-boot-starter-security-2.6.7.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-aop\5.3.19\spring-aop-5.3.19.jar;C:\Users\cefco\.m2\repository\org\springframework\security\spring-security-config\5.6.3\spring-security-config-5.6.3.jar;C:\Users\cefco\.m2\repository\org\springframework\security\spring-security-core\5.6.3\spring-security-core-5.6.3.jar;C:\Users\cefco\.m2\repository\org\springframework\security\spring-security-crypto\5.6.3\spring-security-crypto-5.6.3.jar;C:\Users\cefco\.m2\repository\org\springframework\security\spring-security-web\5.6.3\spring-security-web-5.6.3.jar;C:\Users\cefco\.m2\repository\org\springframework\spring-expression\5.3.19\spring-expression-5.3.19.jar;C:\Users\cefco\.m2\repository\org\thymeleaf\extras\thymeleaf-extras-springsecurity5\3.0.4.RELEASE\thymeleaf-extras-springsecurity5-3.0.4.RELEASE.jar;C:\Users\cefco\.m2\repository\org\slf4j\slf4j-api\1.7.36\slf4j-api-1.7.36.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\cefco"/>
+    <property name="user.language" value="fr"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2023-04-18"/>
+    <property name="java.home" value="C:\Users\cefco\.jdks\openjdk-20.0.1"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\cefco\Desktop\prog\[GIT]_FAC\L3\agl\aglter23"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\cefco\AppData\Local\Temp\surefire14684468258410605424\surefirebooter11714841179757708028.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="20.0.1+9-29"/>
+    <property name="user.name" value="cefco"/>
+    <property name="stdout.encoding" value="Cp1252"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\cefco\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\cefco\AppData\Local\Temp\"/>
+    <property name="idea.version" value="2023.1.2"/>
+    <property name="java.version" value="20.0.1"/>
+    <property name="user.dir" value="C:\Users\cefco\Desktop\prog\[GIT]_FAC\L3\agl\aglter23"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Users\cefco\.jdks\openjdk-20.0.1\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\Users\cefco\AppData\Local\Microsoft\WindowsApps;C:\Users\cefco\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\cefco\AppData\Local\Programs\Python\Python311;;C:\Program Files\JetBrains\IntelliJ IDEA 2023.1.2\bin;;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1252"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="20.0.1+9-29"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="64.0"/>
+  </properties>
+  <testcase name="contextLoads" classname="um.fds.agl.ter23.Ter23ApplicationTests" time="0"/>
+</testsuite>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\target\surefire-reports\um.fds.agl.ter23.repositories.TeacherRepositoryTest.txt :
+```
+-------------------------------------------------------------------------------
+Test set: um.fds.agl.ter23.repositories.TeacherRepositoryTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 5.29 s <<< FAILURE! - in um.fds.agl.ter23.repositories.TeacherRepositoryTest
+savingTeachersIsPossibleForManager  Time elapsed: 0.12 s  <<< ERROR!
+org.springframework.dao.IncorrectResultSizeDataAccessException: query did not return a unique result: 2; nested exception is javax.persistence.NonUniqueResultException: query did not return a unique result: 2
+	at um.fds.agl.ter23.repositories.TeacherRepositoryTest.savingTeachersIsPossibleForManager(TeacherRepositoryTest.java:39)
+Caused by: javax.persistence.NonUniqueResultException: query did not return a unique result: 2
+	at um.fds.agl.ter23.repositories.TeacherRepositoryTest.savingTeachersIsPossibleForManager(TeacherRepositoryTest.java:39)
+
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\target\surefire-reports\um.fds.agl.ter23.Ter23ApplicationTests.txt :
+```
+-------------------------------------------------------------------------------
+Test set: um.fds.agl.ter23.Ter23ApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s - in um.fds.agl.ter23.Ter23ApplicationTests
+
+```
+
