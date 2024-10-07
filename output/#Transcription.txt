@@ -1,0 +1,2055 @@
+Arborescence du projet :
+aglter24/
+    #Transcription.py (taille: 9189 octets, permissions: 666)
+    .gitignore (taille: 3621 octets, permissions: 666)
+    pom.xml (taille: 3011 octets, permissions: 666)
+    system.properties (taille: 23 octets, permissions: 666)
+    src/
+        main/
+            java/
+                um/
+                    fds/
+                        agl/
+                            ter24/
+                                DatabaseLoader.java (taille: 2266 octets, permissions: 666)
+                                SecurityConfiguration.java (taille: 1868 octets, permissions: 666)
+                                Ter24Application.java (taille: 320 octets, permissions: 666)
+                                controllers/
+                                    HomeController.java (taille: 496 octets, permissions: 666)
+                                    StudentController.java (taille: 2544 octets, permissions: 666)
+                                    TeacherController.java (taille: 2676 octets, permissions: 666)
+                                    TERController.java (taille: 4434 octets, permissions: 666)
+                                entities/
+                                    Student.java (taille: 554 octets, permissions: 666)
+                                    Sujet.java (taille: 473 octets, permissions: 666)
+                                    Teacher.java (taille: 1835 octets, permissions: 666)
+                                    TER.java (taille: 1345 octets, permissions: 666)
+                                    TERManager.java (taille: 608 octets, permissions: 666)
+                                    UserTER.java (taille: 3128 octets, permissions: 666)
+                                forms/
+                                    StudentForm.java (taille: 814 octets, permissions: 666)
+                                    TeacherForm.java (taille: 804 octets, permissions: 666)
+                                    TERForm.java (taille: 809 octets, permissions: 666)
+                                repositories/
+                                    StudentRepository.java (taille: 625 octets, permissions: 666)
+                                    SujetRepository.java (taille: 282 octets, permissions: 666)
+                                    TeacherRepository.java (taille: 812 octets, permissions: 666)
+                                    TERManagerRepository.java (taille: 438 octets, permissions: 666)
+                                    TERRepository.java (taille: 841 octets, permissions: 666)
+                                    UserBaseRepository.java (taille: 381 octets, permissions: 666)
+                                    UserTERRepository.java (taille: 161 octets, permissions: 666)
+                                services/
+                                    SpringDataJpaUserDetailsService.java (taille: 1299 octets, permissions: 666)
+                                    StudentService.java (taille: 971 octets, permissions: 666)
+                                    TeacherService.java (taille: 1073 octets, permissions: 666)
+                                    TERManagerService.java (taille: 497 octets, permissions: 666)
+                                    TERService.java (taille: 843 octets, permissions: 666)
+            resources/
+                application.properties (taille: 89 octets, permissions: 666)
+                static/
+                    main.css (taille: 172 octets, permissions: 666)
+                templates/
+                    addStudent.html (taille: 721 octets, permissions: 666)
+                    addTeacher.html (taille: 721 octets, permissions: 666)
+                    addTER.html (taille: 811 octets, permissions: 666)
+                    error.html (taille: 318 octets, permissions: 666)
+                    index.html (taille: 504 octets, permissions: 666)
+                    listStudents.html (taille: 813 octets, permissions: 666)
+                    listTeachers.html (taille: 813 octets, permissions: 666)
+                    listTERs.html (taille: 762 octets, permissions: 666)
+                    updateStudent.html (taille: 770 octets, permissions: 666)
+                    updateTeacher.html (taille: 769 octets, permissions: 666)
+                    updateTER.html (taille: 860 octets, permissions: 666)
+        test/
+            java/
+                um/
+                    fds/
+                        agl/
+                            ter24/
+                                Ter24ApplicationTests.java (taille: 220 octets, permissions: 666)
+                                controllers/
+                                    TeacherControllerTest.java (taille: 1950 octets, permissions: 666)
+                                repositories/
+                                    TeacherRepositoryTest.java (taille: 2388 octets, permissions: 666)
+
+c:\Users\tommi\Documents\Projets\aglter24\#Transcription.py (Taille: 9189 octets, Permissions: 666) :
+Informations clés :
+Classes trouvées: CodeAnalyzer
+Fonctions trouvées: __init__, visit_ClassDef, visit_FunctionDef, generer_arborescence, est_pertinent, extraire_metadonnees, extraire_informations_cles, generer_graphe_dependances, main
+Dépendances: os, argparse, re, ast, json, yaml, subprocess, graphviz, os, shutil, collections
+```
+import os
+import argparse
+import re
+import ast
+import json
+import yaml
+import subprocess
+import graphviz
+import os
+import shutil
+
+from collections import defaultdict
+
+# Fonction pour analyser le fichier et extraire les classes et fonctions
+class CodeAnalyzer(ast.NodeVisitor):
+    def __init__(self):
+        self.classes = []
+        self.functions = []
+
+    def visit_ClassDef(self, node):
+        self.classes.append(node.name)
+        self.generic_visit(node)
+
+    def visit_FunctionDef(self, node):
+        self.functions.append(node.name)
+        self.generic_visit(node)
+
+# Fonction pour générer l'arborescence du projet avec détails sur les fichiers
+def generer_arborescence(dossier, exclusions):
+    arborescence = ""
+    for root, dirs, files in os.walk(dossier):
+        dirs[:] = [d for d in dirs if d not in exclusions]
+        niveau = root.replace(dossier, "").count(os.sep)
+        indent = " " * 4 * niveau
+        arborescence += f"{indent}{os.path.basename(root)}/\n"
+        sous_indent = " " * 4 * (niveau + 1)
+        for fichier in files:
+            if fichier not in exclusions:
+                chemin_fichier = os.path.join(root, fichier)
+                try:
+                    taille = os.path.getsize(chemin_fichier)
+                    permissions = oct(os.stat(chemin_fichier).st_mode)[-3:]
+                    arborescence += f"{sous_indent}{fichier} (taille: {taille} octets, permissions: {permissions})\n"
+                except Exception as e:
+                    arborescence += f"{sous_indent}{fichier} (informations non disponibles: {e})\n"
+    return arborescence
+
+# Fonction utilitaire pour vérifier si un fichier est pertinent
+def est_pertinent(fichier, extensions, exclusions):
+    extension = os.path.splitext(fichier)[1]
+    if extension not in extensions or fichier in exclusions:
+        return False
+    try:
+        with open(fichier, 'r', encoding='utf-8') as f:
+            contenu = f.read()
+            mots_cles = ["main", "import", "class", "def", "function"]
+            for mot in mots_cles:
+                if mot in contenu:
+                    return True
+    except Exception as e:
+        return False
+    return False
+
+# Extraction des métadonnées d'un fichier
+def extraire_metadonnees(fichier):
+    try:
+        taille = os.path.getsize(fichier)
+        permissions = oct(os.stat(fichier).st_mode)[-3:]
+        return f"Taille: {taille} octets, Permissions: {permissions}"
+    except Exception as e:
+        return f"Informations non disponibles: {e}"
+
+# Extraction des informations clés
+def extraire_informations_cles(contenu, chemin_fichier):
+    informations_cles = []
+    if chemin_fichier.endswith(('.py', '.java', '.js', '.ts', '.cpp', '.c', '.hpp', '.h', '.cs', '.php', '.rb', '.go', '.swift')):
+        if chemin_fichier.endswith('.py'):
+            analyzer = CodeAnalyzer()
+            try:
+                arbre = ast.parse(contenu)
+                analyzer.visit(arbre)
+                if analyzer.classes:
+                    informations_cles.append(f"Classes trouvées: {', '.join(analyzer.classes)}")
+                if analyzer.functions:
+                    informations_cles.append(f"Fonctions trouvées: {', '.join(analyzer.functions)}")
+            except Exception as e:
+                informations_cles.append(f"Erreur d'analyse AST: {e}")
+        else:
+            classes = re.findall(r'class\s+(\w+)', contenu)
+            if classes:
+                informations_cles.append(f"Classes trouvées: {', '.join(classes)}")
+            fonctions = re.findall(r'def\s+(\w+)|function\s+(\w+)', contenu)
+            if fonctions:
+                fonctions_noms = [f[0] if f[0] else f[1] for f in fonctions]
+                informations_cles.append(f"Fonctions trouvées: {', '.join(fonctions_noms)}")
+        imports = re.findall(r'import\s+([\w\.]+)|from\s+([\w\.]+)\s+import', contenu)
+        imports_noms = [imp[0] if imp[0] else imp[1] for imp in imports]
+        if imports_noms:
+            informations_cles.append(f"Dépendances: {', '.join(imports_noms)}")
+    return informations_cles
+
+# Fonction pour générer un graphe des dépendances
+def generer_graphe_dependances(dossier, exclusions, dossier_output):
+    os.environ["PATH"] += os.pathsep + r"C:\\Program Files\\Graphviz\\bin"
+
+    graphe = graphviz.Digraph('Dépendances', format='svg')  # Utiliser SVG pour un format plus adapté à ChatGPT
+    dependencies = defaultdict(set)
+
+    for root, _, files in os.walk(dossier):
+        for fichier in files:
+            chemin_fichier = os.path.join(root, fichier)
+            if chemin_fichier.endswith(('.py', '.java', '.js', '.ts', '.cpp', '.c', '.cs', '.php', '.rb', '.go', '.swift')):
+                try:
+                    with open(chemin_fichier, 'r', encoding='utf-8') as f:
+                        contenu = f.read()
+                        imports = re.findall(r'import\s+([\w\.]+)|from\s+([\w\.]+)\s+import', contenu)
+                        imports_noms = [imp[0] if imp[0] else imp[1] for imp in imports]
+                        for imp in imports_noms:
+                            dependencies[os.path.basename(chemin_fichier)].add(imp)
+                except Exception as e:
+                    print(f"Erreur lors de la lecture du fichier {chemin_fichier}: {e}")
+                    continue
+
+    for fichier, deps in dependencies.items():
+        for dep in deps:
+            graphe.edge(fichier, dep)
+
+    graphe.render(os.path.join(dossier_output, 'graph_dependances'), engine='dot')
+
+# Fonction principale
+def main():
+    parser = argparse.ArgumentParser(description="Transcription de fichiers pertinents pour comprendre un projet.")
+    parser.add_argument("--extensions", nargs="+", default=[
+        '.py', '.txt', '.md', '.json', '.cfg', '.ini', '.yml', '.yaml',
+        '.html', '.css', '.js', '.java', '.cpp', '.c', '.hpp', '.h', '.cs',
+        '.php', '.rb', '.go', '.ts', '.xml', '.sh', '.bat', '.swift'
+    ], help="Extensions de fichiers à inclure (par défaut : extensions de programmation classiques)."
+    )
+    parser.add_argument("--exclusions", nargs="+", default=[
+        '__pycache__', '.git', 'venv', 'dist', 'build', '.idea', 'target', 'mvnw', 'mvnw.cmd'
+    ], help="Fichiers et dossiers à exclure (par défaut : fichiers non pertinents)."
+    )
+    parser.add_argument("--taille-maximale", type=int, default=1,
+                        help="Taille maximale des fichiers à inclure en Mo (par défaut : 1 Mo)."
+    )
+    parser.add_argument("--dossier-source", type=str, default=os.path.abspath(os.path.dirname(__file__)),
+                        help="Dossier source à parcourir (par défaut : répertoire du script)."
+    )
+    parser.add_argument("--fichier-destination", type=str, default='output/#Transcription.txt',
+                        help="Nom du fichier de destination pour la transcription (par défaut : output/#Transcription.txt)."
+    )
+
+    args = parser.parse_args()
+
+    # Créer le dossier output s'il n'existe pas
+    dossier_output = os.path.join(args.dossier_source, 'output')
+    if not os.path.exists(dossier_output):
+        os.makedirs(dossier_output)
+
+    # Ajouter le dossier output aux exclusions
+    args.exclusions.append('output')
+
+    fichier_destination = os.path.join(dossier_output, os.path.basename(args.fichier_destination))
+
+    with open(fichier_destination, 'w', encoding='utf-8') as f_dest:
+        f_dest.write("Arborescence du projet :\n")
+        arborescence = generer_arborescence(args.dossier_source, args.exclusions)
+        f_dest.write(arborescence + "\n")
+
+        taille_maximale = args.taille_maximale * 1024 * 1024
+
+        for root, dirs, files in os.walk(args.dossier_source):
+            dirs[:] = [d for d in dirs if d not in args.exclusions]
+            for fichier in files:
+                chemin_fichier = os.path.join(root, fichier)
+                if est_pertinent(chemin_fichier, args.extensions, args.exclusions) and os.path.getsize(chemin_fichier) <= taille_maximale:
+                    try:
+                        with open(chemin_fichier, 'r', encoding='utf-8') as f_source:
+                            contenu = f_source.read()
+                        metadonnees = extraire_metadonnees(chemin_fichier)
+                        informations_cles = extraire_informations_cles(contenu, chemin_fichier)
+                        informations_cles_str = "\n".join(informations_cles)
+
+                        f_dest.write(f"{chemin_fichier} ({metadonnees}) :\n")
+                        if informations_cles:
+                            f_dest.write(f"Informations clés :\n{informations_cles_str}\n")
+                        f_dest.write(f"```\n{contenu}\n```\n\n")
+                        print(f"Ajouté : {chemin_fichier}")
+                    except Exception as e:
+                        print(f"Impossible de lire {chemin_fichier}: {e}")
+
+        generer_graphe_dependances(args.dossier_source, args.exclusions, dossier_output)
+
+if __name__ == "__main__":
+    main()
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\DatabaseLoader.java (Taille: 2266 octets, Permissions: 666) :
+Informations clés :
+Classes trouvées: DatabaseLoader
+Dépendances: org.springframework.beans.factory.annotation.Autowired, org.springframework.boot.CommandLineRunner, org.springframework.stereotype.Component, org.springframework.security.authentication.UsernamePasswordAuthenticationToken, org.springframework.security.core.authority.AuthorityUtils, org.springframework.security.core.context.SecurityContextHolder, um.fds.agl.ter24.entities., um.fds.agl.ter24.repositories.
+```
+package um.fds.agl.ter24;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
+import um.fds.agl.ter24.entities.*;
+import um.fds.agl.ter24.repositories.*;
+
+@Component
+public class DatabaseLoader implements CommandLineRunner {
+    private final TeacherRepository teachers;
+    private final TERManagerRepository managers;
+    private final StudentRepository students;
+    private final TERRepository ter;
+
+
+    @Autowired
+    public DatabaseLoader(TeacherRepository teachers, TERManagerRepository managers, StudentRepository students, TERRepository ter) {
+        this.teachers = teachers;
+        this.managers = managers;
+        this.students = students;
+        this.ter = ter;
+    }
+
+    @Override
+    public void run(String... strings) throws Exception {
+        TERManager terM1Manager = this.managers.save(new TERManager("Le", "Chef", "mdp", "ROLE_MANAGER"));
+        SecurityContextHolder.getContext().setAuthentication(
+                new UsernamePasswordAuthenticationToken("Chef", "bigre",
+                        AuthorityUtils.createAuthorityList("ROLE_MANAGER"))); // the actual password is not needed here
+        Teacher teacher1 = new Teacher("Ada", "Lovelace", "lovelace", terM1Manager, "ROLE_TEACHER");
+        Teacher teacher2 = new Teacher("Alan", "Turing", "turing", terM1Manager, "ROLE_TEACHER");
+        Teacher teacher3 = new Teacher("Leslie", "Lamport", "lamport", terM1Manager, "ROLE_TEACHER");
+        this.teachers.save(teacher1);
+        this.teachers.save(teacher2);
+        this.teachers.save(teacher3);
+        this.students.save(new Student("Gustave", "Flaubert"));
+        this.students.save(new Student("Frédéric", "Chopin"));
+        this.ter.save(new TER(teacher1, "Maths"));
+        this.ter.save(new TER(teacher1, "Maths & co"));
+        this.ter.save(new TER(teacher2, "Info"));
+
+        SecurityContextHolder.clearContext();
+
+    }
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\SecurityConfiguration.java (Taille: 1868 octets, Permissions: 666) :
+Informations clés :
+Classes trouvées: SecurityConfiguration
+Dépendances: org.springframework.beans.factory.annotation.Autowired, org.springframework.context.annotation.Configuration, org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder, org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity, org.springframework.security.config.annotation.web.builders.HttpSecurity, org.springframework.security.config.annotation.web.configuration.EnableWebSecurity, org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter, um.fds.agl.ter24.entities.UserTER, um.fds.agl.ter24.services.SpringDataJpaUserDetailsService
+```
+package um.fds.agl.ter24;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import um.fds.agl.ter24.entities.UserTER;
+import um.fds.agl.ter24.services.SpringDataJpaUserDetailsService;
+
+@Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private SpringDataJpaUserDetailsService userDetailsService;
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .userDetailsService(this.userDetailsService)
+                .passwordEncoder(UserTER.PASSWORD_ENCODER);
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                .antMatchers("/built/**", "/main.css").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .defaultSuccessUrl("/", true)
+                .permitAll()
+                .and()
+                .httpBasic()
+                .and()
+                .csrf().disable()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login");
+    }
+
+}
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\Ter24Application.java (Taille: 320 octets, Permissions: 666) :
+Informations clés :
+Classes trouvées: Ter24Application
+Dépendances: org.springframework.boot.SpringApplication, org.springframework.boot.autoconfigure.SpringBootApplication
+```
+package um.fds.agl.ter24;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class Ter24Application {
+
+	public static void main(String[] args) {
+		SpringApplication.run(Ter24Application.class, args);
+	}
+
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\controllers\HomeController.java (Taille: 496 octets, Permissions: 666) :
+Informations clés :
+Classes trouvées: HomeController
+Dépendances: org.springframework.stereotype.Controller, org.springframework.web.bind.annotation.RequestMapping, org.springframework.web.servlet.ModelAndView
+```
+package um.fds.agl.ter24.controllers;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+@Controller
+public class HomeController {
+    @RequestMapping(value = "/") // support of the "/" route
+    public String index() {
+        return "index"; // index is the name of the template, the view resolver will map it into src/main/resources/templates/index.html.
+    }
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\controllers\StudentController.java (Taille: 2544 octets, Permissions: 666) :
+Informations clés :
+Classes trouvées: StudentController
+Dépendances: org.springframework.beans.factory.annotation.Autowired, org.springframework.boot.web.servlet.error.ErrorController, org.springframework.security.access.prepost.PreAuthorize, org.springframework.stereotype.Controller, org.springframework.ui.Model, org.springframework.web.bind.annotation., um.fds.agl.ter24.entities.Student, um.fds.agl.ter24.forms.StudentForm, um.fds.agl.ter24.services.StudentService, um.fds.agl.ter24.services.TeacherService
+```
+package um.fds.agl.ter24.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import um.fds.agl.ter24.entities.Student;
+import um.fds.agl.ter24.forms.StudentForm;
+import um.fds.agl.ter24.services.StudentService;
+import um.fds.agl.ter24.services.TeacherService;
+
+@Controller
+public class StudentController{
+
+    @Autowired
+    private TeacherService teacherService;
+    @Autowired
+    private StudentService studentService;
+
+    @GetMapping("/listStudents")
+    public Iterable<Student> getStudents(Model model) {
+        model.addAttribute("students", studentService.getStudents());
+        return studentService.getStudents();
+    }
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    @GetMapping(value = { "/addStudent" })
+    public String showAddPersonPage(Model model) {
+
+        StudentForm studentForm = new StudentForm();
+        model.addAttribute("studentForm", studentForm);
+
+        return "addStudent";
+    }
+
+    @PostMapping(value = { "/addStudent"})
+    public String addStudent(Model model, @ModelAttribute("StudentForm") StudentForm studentForm) {
+        Student student;
+        if(studentService.findById(studentForm.getId()).isPresent()){
+            student = studentService.findById(studentForm.getId()).get();
+            student.setFirstName(studentForm.getFirstName());
+            student.setLastName(studentForm.getLastName());
+        } else {
+            student = new Student(studentForm.getFirstName(), studentForm.getLastName());
+        }
+        studentService.saveStudent(student);
+        return "redirect:/listStudents";
+
+    }
+
+    @GetMapping(value = {"/showStudentUpdateForm/{id}"})
+    public String showStudentUpdateForm(Model model, @PathVariable(value = "id") long id){
+
+        StudentForm studentForm = new StudentForm(id, studentService.findById(id).get().getFirstName(), studentService.findById(id).get().getLastName());
+        model.addAttribute("studentForm", studentForm);
+        return "updateStudent";
+    }
+
+    @GetMapping(value = {"/deleteStudent/{id}"})
+    public String deleteStudent(Model model, @PathVariable(value = "id") long id){
+        studentService.deleteStudent(id);
+        return "redirect:/listStudents";
+    }
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\controllers\TeacherController.java (Taille: 2676 octets, Permissions: 666) :
+Informations clés :
+Classes trouvées: TeacherController
+Dépendances: org.springframework.beans.factory.annotation.Autowired, org.springframework.boot.web.servlet.error.ErrorController, org.springframework.security.access.prepost.PreAuthorize, org.springframework.stereotype.Controller, org.springframework.ui.Model, org.springframework.web.bind.annotation., um.fds.agl.ter24.services.TERManagerService, um.fds.agl.ter24.entities.Teacher, um.fds.agl.ter24.forms.TeacherForm, um.fds.agl.ter24.services.TeacherService
+```
+package um.fds.agl.ter24.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import um.fds.agl.ter24.services.TERManagerService;
+import um.fds.agl.ter24.entities.Teacher;
+import um.fds.agl.ter24.forms.TeacherForm;
+import um.fds.agl.ter24.services.TeacherService;
+
+@Controller
+public class TeacherController {
+
+    @Autowired
+    private TeacherService teacherService;
+    @Autowired
+    private TERManagerService terManagerService;
+
+    @GetMapping("/listTeachers")
+    public Iterable<Teacher> getTeachers(Model model) {
+        Iterable<Teacher> teachers=teacherService.getTeachers();
+        model.addAttribute("teachers", teachers);
+        return teachers;
+    }
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    @GetMapping(value = { "/addTeacher" })
+    public String showAddTeacherPage(Model model) {
+
+        TeacherForm teacherForm = new TeacherForm();
+        model.addAttribute("teacherForm", teacherForm);
+
+        return "addTeacher";
+    }
+
+    @PostMapping(value = { "/addTeacher"})
+    public String addTeacher(Model model, @ModelAttribute("TeacherForm") TeacherForm teacherForm) {
+        Teacher t;
+        if(teacherService.findById(teacherForm.getId()).isPresent()){
+            // teacher already existing : update
+            t = teacherService.findById(teacherForm.getId()).get();
+            t.setFirstName(teacherForm.getFirstName());
+            t.setLastName(teacherForm.getLastName());
+        } else {
+            // teacher not existing : create
+            t=new Teacher(teacherForm.getFirstName(), teacherForm.getLastName(), terManagerService.getTERManager());
+        }
+        teacherService.saveTeacher(t);
+        return "redirect:/listTeachers";
+
+    }
+
+    @GetMapping(value = {"/showTeacherUpdateForm/{id}"})
+    public String showTeacherUpdateForm(Model model, @PathVariable(value = "id") long id){
+
+        TeacherForm teacherForm = new TeacherForm(id, teacherService.findById(id).get().getFirstName(), teacherService.findById(id).get().getLastName());
+        model.addAttribute("teacherForm", teacherForm);
+        return "updateTeacher";
+    }
+
+    @GetMapping(value = {"/deleteTeacher/{id}"})
+    public String deleteTeacher(Model model, @PathVariable(value = "id") long id){
+        teacherService.deleteTeacher(id);
+        return "redirect:/listTeachers";
+    }
+
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\controllers\TERController.java (Taille: 4434 octets, Permissions: 666) :
+Informations clés :
+Classes trouvées: TERController
+Dépendances: org.springframework.beans.factory.annotation.Autowired, org.springframework.context.annotation.Role, org.springframework.context.support.BeanDefinitionDsl, org.springframework.security.access.prepost.PreAuthorize, org.springframework.security.core.Authentication, org.springframework.security.core.GrantedAuthority, org.springframework.security.core.authority.SimpleGrantedAuthority, org.springframework.stereotype.Controller, org.springframework.ui.Model, org.springframework.web.bind.annotation.GetMapping, org.springframework.web.bind.annotation.ModelAttribute, org.springframework.web.bind.annotation.PathVariable, org.springframework.web.bind.annotation.PostMapping, um.fds.agl.ter24.entities.TER, um.fds.agl.ter24.entities.Teacher, um.fds.agl.ter24.forms.TERForm, um.fds.agl.ter24.repositories.TeacherRepository, um.fds.agl.ter24.services.TERService, um.fds.agl.ter24.services.TeacherService, java.util.ArrayList, java.util.List, java.util.Objects
+```
+package um.fds.agl.ter24.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Role;
+import org.springframework.context.support.BeanDefinitionDsl;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import um.fds.agl.ter24.entities.TER;
+import um.fds.agl.ter24.entities.Teacher;
+import um.fds.agl.ter24.forms.TERForm;
+import um.fds.agl.ter24.repositories.TeacherRepository;
+import um.fds.agl.ter24.services.TERService;
+import um.fds.agl.ter24.services.TeacherService;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+@Controller
+public class TERController {
+
+    @Autowired
+    private TERService terService;
+
+    @Autowired
+    private TeacherService teacherService;
+
+    public TERController(TERService terService, TeacherService teacherService) {
+        this.terService = terService;
+        this.teacherService = teacherService;
+    }
+
+    @GetMapping("/listTERs")
+    public Iterable<TER> getTERs(Model model) {
+        model.addAttribute("TER", terService.getTERs());
+        return terService.getTERs();
+    }
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_TEACHER')")
+    @GetMapping(value = { "/addTER" })
+    public String showAddTERPage(Model model, Authentication authentication) {
+        TERForm TERForm = new TERForm();
+        model.addAttribute("TERForm", TERForm);
+        model.addAttribute("teachers", getTeachers(authentication));
+
+        return "addTER";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER') or (@teacherService.getTeacher(#TERForm?.teacher).get()?.lastName == authentication.name)")
+    @PostMapping(value = { "/addTER"})
+    public String addTER(Model model, @ModelAttribute("TERForm") TERForm TERForm) {
+        TER TER;
+        Teacher teacher = teacherService.getTeacher(TERForm.getTeacher()).get();
+        if(terService.findById(TERForm.getId()).isPresent()){
+            TER = terService.findById(TERForm.getId()).get();
+            TER.setSubject(TERForm.getSubject());
+            TER.setTeacher(teacher);
+        } else {
+            TER = new TER(teacher, TERForm.getSubject());
+        }
+        terService.saveTER(TER);
+        return "redirect:/listTERs";
+
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER') or (@teacherService.getTeacher(@TERService.findById(#id).get()?.teacher.id).get()?.lastName == authentication.name)")
+    @GetMapping(value = {"/showTERUpdateForm/{id}"})
+    public String showTERUpdateForm(Model model, @PathVariable(value = "id") long id, Authentication authentication){
+        TERForm TERForm = new TERForm(id, terService.findById(id).get().getTeacher().getId(), terService.findById(id).get().getSubject());
+        model.addAttribute("TERForm", TERForm);
+        model.addAttribute("teachers", getTeachers(authentication));
+        return "updateTER";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER') or (@teacherService.getTeacher(@TERService.findById(#id).get()?.teacher.id).get()?.lastName == authentication.name)")
+    @GetMapping(value = {"/deleteTER/{id}"})
+    public String deleteTER(Model model, @PathVariable(value = "id") long id){
+        terService.deleteTER(id);
+        return "redirect:/listTERs";
+    }
+
+    private List<Teacher> getTeachers(Authentication authentication) {
+        Iterable<Teacher> teacherIterable = teacherService.getTeachers();
+        List<Teacher> teachers = new ArrayList<>();
+        if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_MANAGER"))) teacherIterable.forEach(teachers::add);
+        else {
+            teacherIterable.forEach(teacher -> {
+                if(Objects.equals(teacher.getLastName(), authentication.getName()))
+                    teachers.add(teacher);
+            });
+        }
+        return teachers;
+    }
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\entities\Student.java (Taille: 554 octets, Permissions: 666) :
+Informations clés :
+Classes trouvées: Student
+Dépendances: javax.persistence.Entity
+```
+package um.fds.agl.ter24.entities;
+
+import javax.persistence.Entity;
+
+@Entity
+public class Student extends UserTER{
+
+    // ici on mettra le groupe
+
+    public Student(String firstName, String lastName){
+        super(firstName, lastName);
+        String[] roles={"ROLE_STUDENT"};
+        this.setRoles(roles);
+    }
+
+    public Student(long id, String firstName, String lastName) {
+        super(id, firstName, lastName);
+        String[] roles = {"ROLE_STUDENT"};
+        this.setRoles(roles);
+    }
+    public Student() {}
+
+
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\entities\Sujet.java (Taille: 473 octets, Permissions: 666) :
+Informations clés :
+Classes trouvées: Sujet
+Dépendances: org.springframework.beans.factory.annotation.Autowired, javax.persistence.
+```
+package um.fds.agl.ter24.entities;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.persistence.*;
+
+@Entity
+public class Sujet {
+    private  @Id    @GeneratedValue String titre;
+    private @OneToOne Teacher teacher;
+
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
+
+    public String getTitre() {
+        return titre;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\entities\Teacher.java (Taille: 1835 octets, Permissions: 666) :
+Informations clés :
+Classes trouvées: Teacher
+Dépendances: javax.persistence.Entity, javax.persistence.ManyToOne
+```
+package um.fds.agl.ter24.entities;
+
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class Teacher extends UserTER {
+    private @ManyToOne TERManager terManager;
+    public Teacher(){}
+    public Teacher(String firstName, String lastName, String password, TERManager manager, String... roles) {
+        super(firstName, lastName, password, roles);
+        this.terManager=manager;
+    }
+
+    public Teacher(String firstName, String lastName, TERManager manager) {
+        super(firstName, lastName);
+        String[] roles={"ROLE_TEACHER"};
+        this.setRoles(roles);
+        this.terManager=manager;
+    }
+
+
+    public TERManager getTerManager() {
+        return terManager;
+    }
+
+    public void setTerManager(TERManager terManager) {
+        this.terManager = terManager;
+    }
+
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "id=" + getId() +
+                ", firstName='" + getFirstName() + '\'' +
+                ", lastName='" + getLastName() + '\'' +
+                ", manager='"+ getTerManager() + '\'' +
+                '}';
+    }
+
+    public String Name() {
+        return getFirstName() + ' ' + getLastName();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Teacher)) return false;
+        if (!super.equals(o)) return false;
+
+        Teacher teacher = (Teacher) o;
+
+        return getTerManager() != null ? getTerManager().equals(teacher.getTerManager()) : teacher.getTerManager() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (getTerManager() != null ? getTerManager().hashCode() : 0);
+        return result;
+    }
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\entities\TER.java (Taille: 1345 octets, Permissions: 666) :
+Informations clés :
+Classes trouvées: TER
+Dépendances: javax.persistence., java.util.Objects
+```
+package um.fds.agl.ter24.entities;
+
+import javax.persistence.*;
+import java.util.Objects;
+
+@Entity
+public class TER {
+
+    private @Id
+    @GeneratedValue Long id;
+
+    @ManyToOne
+    private Teacher teacher;
+    private String subject;
+
+    public TER(Teacher teacher, String subject){
+        this.teacher = teacher;
+        this.subject = subject;
+    }
+
+    public TER(Long id, Teacher teacher, String subject) {
+        this(teacher, subject);
+        this.id = id;
+    }
+
+    public TER() {}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TER ter = (TER) o;
+        return teacher.equals(ter.teacher) && Objects.equals(subject, ter.subject);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(teacher, subject);
+    }
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\entities\TERManager.java (Taille: 608 octets, Permissions: 666) :
+Informations clés :
+Classes trouvées: TERManager
+Dépendances: javax.persistence.Entity, java.util.Arrays
+```
+package um.fds.agl.ter24.entities;
+
+import javax.persistence.Entity;
+import java.util.Arrays;
+
+@Entity
+public class TERManager extends UserTER {
+
+
+    public TERManager() {}
+
+    public TERManager(String firstName, String lastName, String password, String... roles) {
+        super(firstName,lastName,password, roles);
+    }
+
+
+
+
+
+
+
+
+    @Override
+    public String toString() {
+        return "Manager{" +
+                "id=" + getId()+
+                ", name='" + getLastName() + '\'' +
+                ", roles=" + Arrays.toString(getRoles()) +
+                '}';
+    }
+}
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\entities\UserTER.java (Taille: 3128 octets, Permissions: 666) :
+Informations clés :
+Classes trouvées: UserTER
+Dépendances: com.fasterxml.jackson.annotation.JsonIgnore, org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder, org.springframework.security.crypto.password.PasswordEncoder, javax.persistence.Entity, javax.persistence.GeneratedValue, javax.persistence.Id, javax.persistence.Inheritance, java.util.Arrays
+```
+package um.fds.agl.ter24.entities;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import java.util.Arrays;
+
+
+@Entity
+@Inheritance
+public abstract class UserTER {
+    public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
+
+    private @Id    @GeneratedValue Long id;
+    private String firstName;
+    private String lastName;
+    private @JsonIgnore String password;
+    private @JsonIgnore String[] roles;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = PASSWORD_ENCODER.encode(password);
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String[] getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String[] roles) {
+        this.roles = roles;
+    }
+
+    public UserTER(){}
+    public UserTER(String firstName, String lastName, String password, String[] roles) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        setPassword(password);
+        this.roles = roles;
+    }
+
+    public UserTER(String firstName, String lastName) {
+        //default : the password is the name, no role ...
+        this(firstName, lastName, lastName, new String[0]);
+    }
+
+    public UserTER(long id, String firstName, String lastName) {
+        //default : the password is the name, no role ...
+        this(firstName, lastName, lastName, new String[0]);
+        this.id = id;
+    }
+
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserTER)) return false;
+
+        UserTER user = (UserTER) o;
+
+        if (!getId().equals(user.getId())) return false;
+        if (!getFirstName().equals(user.getFirstName())) return false;
+        if (!getLastName().equals(user.getLastName())) return false;
+        if (!password.equals(user.password)) return false;
+        // Probably incorrect - comparing Object[] arrays with Arrays.equals
+        return Arrays.equals(roles, user.roles);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId().hashCode();
+        result = 31 * result + getFirstName().hashCode();
+        result = 31 * result + getLastName().hashCode();
+        result = 31 * result + password.hashCode();
+        result = 31 * result + Arrays.hashCode(roles);
+        return result;
+    }
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\forms\StudentForm.java (Taille: 814 octets, Permissions: 666) :
+Informations clés :
+Classes trouvées: StudentForm
+```
+package um.fds.agl.ter24.forms;
+
+public class StudentForm {
+    private String firstName;
+    private long id;
+    private String lastName;
+
+    public StudentForm(long id, String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.id = id;
+    }
+
+    public StudentForm() {
+
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\forms\TeacherForm.java (Taille: 804 octets, Permissions: 666) :
+Informations clés :
+Classes trouvées: TeacherForm
+```
+package um.fds.agl.ter24.forms;
+
+public class TeacherForm {
+    private String firstName;
+    private String lastName;
+    private long id;
+
+    public TeacherForm(long id, String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.id = id;
+    }
+
+    public TeacherForm() {}
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\forms\TERForm.java (Taille: 809 octets, Permissions: 666) :
+Informations clés :
+Classes trouvées: TERForm
+Dépendances: um.fds.agl.ter24.entities.Teacher
+```
+package um.fds.agl.ter24.forms;
+
+import um.fds.agl.ter24.entities.Teacher;
+
+public class TERForm {
+    private Long teacher;
+    private long id;
+    private String subject;
+
+    public TERForm(long id, Long teacher, String subject) {
+        this.teacher = teacher;
+        this.subject = subject;
+        this.id = id;
+    }
+
+    public TERForm() {
+
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Long getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Long teacher) {
+        this.teacher = teacher;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\repositories\StudentRepository.java (Taille: 625 octets, Permissions: 666) :
+Informations clés :
+Dépendances: org.springframework.data.repository.query.Param, org.springframework.security.access.prepost.PreAuthorize, um.fds.agl.ter24.entities.Student
+```
+package um.fds.agl.ter24.repositories;
+
+import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.prepost.PreAuthorize;
+import um.fds.agl.ter24.entities.Student;
+
+public interface StudentRepository extends UserBaseRepository<Student> {
+
+    @Override
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    Student save(@Param("student") Student student);
+
+    @Override
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    void deleteById(@Param("id") Long id);
+
+    @Override
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    void delete(@Param("student") Student student);
+}
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\repositories\SujetRepository.java (Taille: 282 octets, Permissions: 666) :
+Informations clés :
+Dépendances: org.springframework.data.repository.CrudRepository, org.springframework.stereotype.Repository, um.fds.agl.ter24.entities.Sujet
+```
+package um.fds.agl.ter24.repositories;
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+import um.fds.agl.ter24.entities.Sujet;
+@Repository
+public interface SujetRepository extends CrudRepository<Sujet, Long> {
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\repositories\TeacherRepository.java (Taille: 812 octets, Permissions: 666) :
+Informations clés :
+Dépendances: org.springframework.data.repository.query.Param, org.springframework.security.access.prepost.PreAuthorize, um.fds.agl.ter24.entities.Teacher
+```
+package um.fds.agl.ter24.repositories;
+
+import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.prepost.PreAuthorize;
+import um.fds.agl.ter24.entities.Teacher;
+
+
+public interface TeacherRepository extends UserBaseRepository<Teacher> {
+    @Override
+    @PreAuthorize("hasRole('ROLE_MANAGER') and (#teacher?.terManager == null or #teacher?.terManager?.lastName == authentication?.name)")
+    Teacher save(@Param("teacher") Teacher teacher);
+
+    @Override
+    @PreAuthorize("@teacherRepository.findById(#id).get()?.terManager?.lastName == authentication?.name")
+    void deleteById(@Param("id") Long id);
+
+    @Override
+    @PreAuthorize("#teacher?.terManager?.lastName == authentication?.name")
+    void delete(@Param("teacher") Teacher teacher);
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\repositories\TERManagerRepository.java (Taille: 438 octets, Permissions: 666) :
+Informations clés :
+Dépendances: org.springframework.data.rest.core.annotation.RepositoryRestResource, um.fds.agl.ter24.entities.TERManager
+```
+package um.fds.agl.ter24.repositories;
+
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import um.fds.agl.ter24.entities.TERManager;
+
+@RepositoryRestResource(exported = false)
+public interface TERManagerRepository extends  UserBaseRepository<TERManager> {
+
+    TERManager save(TERManager manager);
+
+    public TERManager findByLastName(String lastName);
+
+    Iterable<TERManager> findAll();
+
+
+}
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\repositories\TERRepository.java (Taille: 841 octets, Permissions: 666) :
+Informations clés :
+Dépendances: org.springframework.data.repository.CrudRepository, org.springframework.data.repository.query.Param, org.springframework.security.access.prepost.PreAuthorize, um.fds.agl.ter24.entities.TER
+```
+package um.fds.agl.ter24.repositories;
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.prepost.PreAuthorize;
+import um.fds.agl.ter24.entities.TER;
+
+public interface TERRepository extends CrudRepository<TER, Long> {
+
+    @Override
+    @PreAuthorize("hasRole('ROLE_MANAGER') or (#ter?.teacher.lastName == authentication?.name)")
+    TER save(@Param("ter") TER ter);
+
+    @Override
+    @PreAuthorize("hasRole('ROLE_MANAGER') or (@TERRepository.findById(#id).get()?.teacher.lastName == authentication?.name)")
+    void deleteById(@Param("id") Long id);
+
+    @Override
+    @PreAuthorize("hasRole('ROLE_MANAGER') or (#ter?.teacher.lastName == authentication?.name)")
+    void delete(@Param("ter") TER ter);
+    
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\repositories\UserBaseRepository.java (Taille: 381 octets, Permissions: 666) :
+Informations clés :
+Dépendances: org.springframework.data.repository.CrudRepository, org.springframework.data.repository.NoRepositoryBean, um.fds.agl.ter24.entities.UserTER
+```
+package um.fds.agl.ter24.repositories;
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.NoRepositoryBean;
+import um.fds.agl.ter24.entities.UserTER;
+
+@NoRepositoryBean
+public interface UserBaseRepository<T extends UserTER>
+        extends CrudRepository<T, Long> {
+
+    public T findByLastName(String lastName);
+
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\repositories\UserTERRepository.java (Taille: 161 octets, Permissions: 666) :
+Informations clés :
+Dépendances: um.fds.agl.ter24.entities.UserTER
+```
+package um.fds.agl.ter24.repositories;
+
+import um.fds.agl.ter24.entities.UserTER;
+
+public interface UserTERRepository extends UserBaseRepository<UserTER> { }
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\services\SpringDataJpaUserDetailsService.java (Taille: 1299 octets, Permissions: 666) :
+Informations clés :
+Classes trouvées: SpringDataJpaUserDetailsService
+Dépendances: org.springframework.beans.factory.annotation.Autowired, org.springframework.stereotype.Component, org.springframework.security.core.authority.AuthorityUtils, org.springframework.security.core.userdetails.User, org.springframework.security.core.userdetails.UserDetails, org.springframework.security.core.userdetails.UserDetailsService, org.springframework.security.core.userdetails.UsernameNotFoundException, um.fds.agl.ter24.entities.UserTER, um.fds.agl.ter24.repositories.UserTERRepository
+```
+package um.fds.agl.ter24.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import um.fds.agl.ter24.entities.UserTER;
+import um.fds.agl.ter24.repositories.UserTERRepository;
+
+@Component
+public class SpringDataJpaUserDetailsService implements UserDetailsService {
+
+    private final UserTERRepository repository;
+
+    @Autowired
+    public SpringDataJpaUserDetailsService(UserTERRepository repository) {
+        this.repository = repository;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
+        UserTER user = this.repository.findByLastName(name);
+        if (user == null) {
+            throw new UsernameNotFoundException(name);
+        }
+        return new User(user.getLastName(), user.getPassword(),
+                AuthorityUtils.createAuthorityList(user.getRoles()));
+    }
+
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\services\StudentService.java (Taille: 971 octets, Permissions: 666) :
+Informations clés :
+Classes trouvées: StudentService
+Dépendances: org.springframework.beans.factory.annotation.Autowired, org.springframework.stereotype.Service, um.fds.agl.ter24.entities.Student, um.fds.agl.ter24.repositories.StudentRepository, java.util.Optional
+```
+package um.fds.agl.ter24.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import um.fds.agl.ter24.entities.Student;
+import um.fds.agl.ter24.repositories.StudentRepository;
+
+import java.util.Optional;
+
+
+@Service
+public class StudentService {
+
+    @Autowired
+    private StudentRepository studentRepository;
+
+    public Optional<Student> getStudent(final Long id) {
+        return studentRepository.findById(id);
+    }
+
+    public Iterable<Student> getStudents() {
+        return studentRepository.findAll();
+    }
+
+    public void deleteStudent(final Long id) {
+        studentRepository.deleteById(id);
+    }
+
+    public Student saveStudent(Student student) {
+        Student savedStudent = studentRepository.save(student);
+        return savedStudent;
+    }
+
+    public Optional<Student> findById(long id) {
+        return studentRepository.findById(id);
+    }
+}
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\services\TeacherService.java (Taille: 1073 octets, Permissions: 666) :
+Informations clés :
+Classes trouvées: TeacherService
+Dépendances: org.springframework.beans.factory.annotation.Autowired, org.springframework.stereotype.Service, um.fds.agl.ter24.entities.Teacher, um.fds.agl.ter24.repositories.TeacherRepository, java.util.Optional
+```
+package um.fds.agl.ter24.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import um.fds.agl.ter24.entities.Teacher;
+import um.fds.agl.ter24.repositories.TeacherRepository;
+
+import java.util.Optional;
+
+
+
+@Service
+public class TeacherService {
+
+    @Autowired
+    private TeacherRepository teacherRepository;
+
+    public Optional<Teacher> getTeacher(final Long id) {
+        return teacherRepository.findById(id);
+    }
+
+    public Iterable<Teacher> getTeachers() {
+        return teacherRepository.findAll();
+    }
+
+    public Teacher findByLastName(String name){return teacherRepository.findByLastName(name);}
+
+    public void deleteTeacher(final Long id) {
+        teacherRepository.deleteById(id);
+    }
+
+    public Teacher saveTeacher(Teacher teacher) {
+        Teacher savedTeacher = teacherRepository.save(teacher);
+        return savedTeacher;
+    }
+
+    public Optional<Teacher> findById(long id) {
+        return teacherRepository.findById(id);
+    }
+
+}
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\services\TERManagerService.java (Taille: 497 octets, Permissions: 666) :
+Informations clés :
+Classes trouvées: TERManagerService
+Dépendances: org.springframework.beans.factory.annotation.Autowired, org.springframework.stereotype.Service, um.fds.agl.ter24.entities.TERManager, um.fds.agl.ter24.repositories.TERManagerRepository
+```
+package um.fds.agl.ter24.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import um.fds.agl.ter24.entities.TERManager;
+import um.fds.agl.ter24.repositories.TERManagerRepository;
+
+
+@Service
+public class TERManagerService {
+    @Autowired
+    private TERManagerRepository terManagerRepository;
+
+    public TERManager getTERManager() {
+        return terManagerRepository.findAll().iterator().next();
+    }
+
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\java\um\fds\agl\ter24\services\TERService.java (Taille: 843 octets, Permissions: 666) :
+Informations clés :
+Classes trouvées: TERService
+Dépendances: org.springframework.beans.factory.annotation.Autowired, org.springframework.stereotype.Service, um.fds.agl.ter24.entities.TER, um.fds.agl.ter24.repositories.TERRepository, java.util.Optional
+```
+package um.fds.agl.ter24.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import um.fds.agl.ter24.entities.TER;
+import um.fds.agl.ter24.repositories.TERRepository;
+
+import java.util.Optional;
+
+@Service
+public class TERService {
+
+
+    @Autowired
+    private TERRepository terRepository;
+
+    public Optional<TER> getTER(final Long id) {
+        return terRepository.findById(id);
+    }
+
+    public Iterable<TER> getTERs() {
+        return terRepository.findAll();
+    }
+
+    public void deleteTER(final Long id) {
+        terRepository.deleteById(id);
+    }
+
+    public TER saveTER(TER ter) {
+        return terRepository.save(ter);
+    }
+
+    public Optional<TER> findById(long id) {
+        return terRepository.findById(id);
+    }
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\resources\templates\addStudent.html (Taille: 721 octets, Permissions: 666) :
+```
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add Student</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>Create a Student:</h1>
+
+<form th:action="@{/addStudent}"
+      th:object="${studentForm}" method="POST">
+    First Name:
+    <input type="text" th:field="*{firstName}"/>
+    <br/>
+    Last Name:
+    <input type="text" th:field="*{lastName}"/>
+    <br/>
+    <input type="submit" value="Create"/>
+</form>
+
+<br/>
+
+<!-- Check if errorMessage is not null and not empty -->
+
+<div th:if="${errorMessage}" th:utext="${errorMessage}"
+     style="color:red;font-style:italic;">
+    ...
+</div>
+
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\resources\templates\addTeacher.html (Taille: 721 octets, Permissions: 666) :
+```
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add Teacher</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>Create a Teacher:</h1>
+
+<form th:action="@{/addTeacher}"
+      th:object="${teacherForm}" method="POST">
+    First Name:
+    <input type="text" th:field="*{firstName}"/>
+    <br/>
+    Last Name:
+    <input type="text" th:field="*{lastName}"/>
+    <br/>
+    <input type="submit" value="Create"/>
+</form>
+
+<br/>
+
+<!-- Check if errorMessage is not null and not empty -->
+
+<div th:if="${errorMessage}" th:utext="${errorMessage}"
+     style="color:red;font-style:italic;">
+    ...
+</div>
+
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\resources\templates\addTER.html (Taille: 811 octets, Permissions: 666) :
+```
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add TER</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>Create a TER:</h1>
+
+<form th:action="@{/addTER}"
+      th:object="${TERForm}" method="POST">
+    Teacher:
+    <select th:field="*{teacher}">
+        <option th:each="option: ${teachers}" th:text="${option.Name()}" th:value="${option.id}">...</option>
+    </select>
+    <br/>
+    Subject:
+    <input type="text" th:field="*{subject}"/>
+    <br/>
+    <input type="submit" value="Create"/>
+</form>
+
+<br/>
+
+<!-- Check if errorMessage is not null and not empty -->
+
+<div th:if="${errorMessage}" th:utext="${errorMessage}"
+     style="color:red;font-style:italic;">
+    ...
+</div>
+
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\resources\templates\error.html (Taille: 318 octets, Permissions: 666) :
+```
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/main.css" />
+    <title>Error</title>
+</head>
+<body>
+<h1>Oups</h1>
+<h2>Quelque chose s'est mal passé, nous n'avons pas pu traiter votre demande.</h2>
+<a href="/">Retourner à l'accueil</a>
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\resources\templates\index.html (Taille: 504 octets, Permissions: 666) :
+```
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head lang="fr">
+    <meta charset="UTF-8"/>
+    <title>Page des TER de M1</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>Page des TER de M1</h1>
+(cette page est un peu aride !)
+<br/>
+
+
+<a th:href="@{/listTeachers}">Teachers List</a>
+<br/>
+<a th:href="@{/listStudents}">Students List</a>
+<br/>
+<a th:href="@{/listTERs}">TER List</a>
+<br/>
+<br/>
+<a th:href="@{/logout}">Logout</a>
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\resources\templates\listStudents.html (Taille: 813 octets, Permissions: 666) :
+```
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Student List</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>Student List</h1>
+<a href="/">Accueil</a>
+<a href="addStudent">Add Students</a>
+<br/><br/>
+<div>
+    <table border="1">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+        </tr>
+        <tr th:each ="student : ${students}">
+            <td th:utext="${student.firstName}">...</td>
+            <td th:utext="${student.lastName}">...</td>
+            <td><a th:href="@{/showStudentUpdateForm/{id}(id=${student.id})}">Update</a>
+                <a th:href="@{/deleteStudent/{id}(id=${student.id})}">Delete</a></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\resources\templates\listTeachers.html (Taille: 813 octets, Permissions: 666) :
+```
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Teacher List</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>Teacher List</h1>
+<a href="/">Accueil</a>
+<a href="addTeacher">Add Teachers</a>
+<br/><br/>
+<div>
+    <table border="1">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+        </tr>
+        <tr th:each ="teacher : ${teachers}">
+            <td th:utext="${teacher.firstName}">...</td>
+            <td th:utext="${teacher.lastName}">...</td>
+            <td><a th:href="@{/showTeacherUpdateForm/{id}(id=${teacher.id})}">Update</a>
+                <a th:href="@{/deleteTeacher/{id}(id=${teacher.id})}">Delete</a></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\resources\templates\listTERs.html (Taille: 762 octets, Permissions: 666) :
+```
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>TER List</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>TER List</h1>
+<a href="/">Accueil</a>
+<a href="addTER">Add TER</a>
+<br/><br/>
+<div>
+    <table border="1">
+        <tr>
+            <th>Teacher</th>
+            <th>Subject</th>
+        </tr>
+        <tr th:each ="TER : ${TER}">
+            <td th:utext="${TER.teacher.Name()}">...</td>
+            <td th:utext="${TER.subject}">...</td>
+            <td><a th:href="@{/showTERUpdateForm/{id}(id=${TER.id})}">Update</a>
+                <a th:href="@{/deleteTER/{id}(id=${TER.id})}">Delete</a></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\resources\templates\updateStudent.html (Taille: 770 octets, Permissions: 666) :
+```
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Update Student</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>Update a Student:</h1>
+
+<form th:action="@{/addStudent}"
+      th:object="${studentForm}" method="POST">
+    <input type="hidden" th:field="*{id}" />
+    First Name:
+    <input type="text" th:field="*{firstName}"/>
+    <br/>
+    Last Name:
+    <input type="text" th:field="*{lastName}"/>
+    <br/>
+    <input type="submit" value="Update"/>
+</form>
+
+<br/>
+
+<!-- Check if errorMessage is not null and not empty -->
+
+<div th:if="${errorMessage}" th:utext="${errorMessage}"
+     style="color:red;font-style:italic;">
+    ...
+</div>
+
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\resources\templates\updateTeacher.html (Taille: 769 octets, Permissions: 666) :
+```
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Update Student</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>Update a Teacher</h1>
+
+<form th:action="@{/addTeacher}"
+      th:object="${teacherForm}" method="POST">
+    <input type="hidden" th:field="*{id}" />
+    First Name:
+    <input type="text" th:field="*{firstName}"/>
+    <br/>
+    Last Name:
+    <input type="text" th:field="*{lastName}"/>
+    <br/>
+    <input type="submit" value="Update"/>
+</form>
+
+<br/>
+
+<!-- Check if errorMessage is not null and not empty -->
+
+<div th:if="${errorMessage}" th:utext="${errorMessage}"
+     style="color:red;font-style:italic;">
+    ...
+</div>
+
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\main\resources\templates\updateTER.html (Taille: 860 octets, Permissions: 666) :
+```
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Update TER</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+<h1>Update a TER:</h1>
+
+<form th:action="@{/addTER}"
+      th:object="${TERForm}" method="POST">
+    <input type="hidden" th:field="*{id}" />
+    Teacher:
+    <select th:field="*{teacher}">
+        <option th:each="option: ${teachers}" th:text="${option.Name()}" th:value="${option.id}">...</option>
+    </select>
+    <br/>
+    Subject:
+    <input type="text" th:field="*{subject}"/>
+    <br/>
+    <input type="submit" value="Update"/>
+</form>
+
+<br/>
+
+<!-- Check if errorMessage is not null and not empty -->
+
+<div th:if="${errorMessage}" th:utext="${errorMessage}"
+     style="color:red;font-style:italic;">
+    ...
+</div>
+
+</body>
+</html>
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\test\java\um\fds\agl\ter24\Ter24ApplicationTests.java (Taille: 220 octets, Permissions: 666) :
+Informations clés :
+Classes trouvées: Ter24ApplicationTests
+Dépendances: org.junit.jupiter.api.Test, org.springframework.boot.test.context.SpringBootTest
+```
+package um.fds.agl.ter24;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class Ter24ApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\test\java\um\fds\agl\ter24\controllers\TeacherControllerTest.java (Taille: 1950 octets, Permissions: 666) :
+Informations clés :
+Classes trouvées: TeacherControllerTest
+Dépendances: org.junit.jupiter.api.Test, org.junit.jupiter.api.extension.ExtendWith, org.springframework.beans.factory.annotation.Autowired, org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc, org.springframework.boot.test.context.SpringBootTest, org.springframework.security.authentication.UsernamePasswordAuthenticationToken, org.springframework.security.core.authority.AuthorityUtils, org.springframework.security.core.context.SecurityContextHolder, org.springframework.security.test.context.support.WithMockUser, org.springframework.test.context.junit.jupiter.SpringExtension, org.springframework.test.web.servlet.MockMvc, org.springframework.test.web.servlet.MvcResult, um.fds.agl.ter24.entities.TERManager, um.fds.agl.ter24.entities.Teacher, static, static, static, org.springframework.test.web.servlet.MockMvc, org.springframework.test.web.servlet.MvcResult, static, static, static
+```
+package um.fds.agl.ter24.controllers;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import um.fds.agl.ter24.entities.TERManager;
+import um.fds.agl.ter24.entities.Teacher;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.*;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import static org.junit.jupiter.api.Assumptions.assumingThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+@ExtendWith(SpringExtension.class)
+@SpringBootTest
+@AutoConfigureMockMvc
+class TeacherControllerTest{
+    @Autowired
+    private MockMvc mvc;
+
+    @Test
+    @WithMockUser(username = "Chef", roles = "MANAGER")
+    void addTeacherGet() throws Exception {
+        MvcResult result = mvc.perform(get("/addTeacher"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("text/html;charset=UTF-8"))
+                .andExpect(view().name("addTeacher"))
+                .andReturn();
+    }
+
+}
+
+```
+
+c:\Users\tommi\Documents\Projets\aglter24\src\test\java\um\fds\agl\ter24\repositories\TeacherRepositoryTest.java (Taille: 2388 octets, Permissions: 666) :
+Informations clés :
+Classes trouvées: TeacherRepositoryTest
+Dépendances: org.junit.jupiter.api.Test, org.junit.jupiter.api.extension.ExtendWith, org.springframework.beans.factory.annotation.Autowired, org.springframework.boot.test.context.SpringBootTest, org.springframework.security.authentication.UsernamePasswordAuthenticationToken, org.springframework.security.core.authority.AuthorityUtils, org.springframework.security.core.context.SecurityContextHolder, org.springframework.test.context.junit.jupiter.SpringExtension, um.fds.agl.ter24.entities.TERManager, um.fds.agl.ter24.entities.Teacher, static, static, static
+```
+package um.fds.agl.ter24.repositories;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import um.fds.agl.ter24.entities.TERManager;
+import um.fds.agl.ter24.entities.Teacher;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+@ExtendWith(SpringExtension.class)
+@SpringBootTest
+class TeacherRepositoryTest {
+    @Autowired
+    private TeacherRepository teachers;
+    @Autowired
+    private TERManagerRepository managers;
+
+
+    @Test
+    void savingTeachersIsPossibleForManager() {
+        SecurityContextHolder.getContext().setAuthentication(
+                new UsernamePasswordAuthenticationToken("lechef", "peu importe", AuthorityUtils.createAuthorityList("ROLE_MANAGER")));
+                        TERManager terM1Manager = new TERManager("Mathieu", "lechef",
+                        "mdp", "ROLE_MANAGER");
+        this.managers.save(terM1Manager);
+        this.teachers.save(new Teacher("Margaret", "Hamilton", "margaret",
+                terM1Manager, "ROLE_TEACHER"));
+        assertThat(teachers.findByLastName("Hamilton"), is(notNullValue()));
+    }
+
+    @Test
+    void TeachersIsConnect() {
+        SecurityContextHolder.getContext().setAuthentication(
+                new UsernamePasswordAuthenticationToken("lechef", "peu importe", AuthorityUtils.createAuthorityList("ROLE_MANAGER")));
+        TERManager terM1Manager = new TERManager("Mathieu", "lechef",
+                "mdp", "ROLE_MANAGER");
+        this.managers.save(terM1Manager);
+        this.teachers.save(new Teacher("Margaret", "Hamilton", "margaret",
+                terM1Manager, "ROLE_TEACHER"));
+        assertThat(teachers.findByLastName("Hamilton"), is(notNullValue()));
+    }
+
+
+
+
+    @Test
+    void save() {
+    }
+
+    @Test
+    void deleteById() {
+    }
+
+    @Test
+    void delete() {
+    }
+}
+```
+
